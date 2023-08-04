@@ -1,10 +1,15 @@
 export default function InputField({
   type = "text",
   title,
-  name,
   placeholder,
+  value,
   onInput,
 }) {
+  const name =
+    title.split(" ").length >= 2
+      ? title.split(" ")[0].toLowerCase() + title.split(" ")[1]
+      : title;
+
   return (
     <label
       style={{
@@ -17,7 +22,7 @@ export default function InputField({
       <input
         type={type}
         name={name}
-        id={name}
+        value={value}
         placeholder={placeholder}
         onInput={onInput}
         required

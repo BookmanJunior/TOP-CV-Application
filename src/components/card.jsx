@@ -1,9 +1,8 @@
-export default function Card({ children, className, title, style }) {
+export default function Card({ children, className, title, onSubmit }) {
   return (
-    <form className={`form-section ${className}`} style={style}>
+    <form className={`form-section ${className}`} onSubmit={onSubmit}>
       <h2>{title}</h2>
       {children}
-      <button>Save</button>
     </form>
   );
 }

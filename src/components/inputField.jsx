@@ -11,13 +11,7 @@ export default function InputField({
       : title;
 
   return (
-    <label
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "5px",
-      }}
-    >
+    <label>
       {title}
       <input
         type={type}

@@ -6,11 +6,37 @@ function AddNewButton({ onAdd, title }) {
   );
 }
 
-function Container({ formState, className, onSubmit, children }) {
-  let container;
+function DisplayInputData({ info, handleDelete, handleEdit }) {
+  return (
+    info && (
+      <ul>
+        {Object.values(info).map((i) => (
+          <li key={i.id}>
+            <button type="button" onClick={() => handleEdit(i.id)}>
+              {i.name}
+            </button>
+            <button type="button" onClick={() => handleDelete(i.id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    )
+  );
+}
 
+function Container({
+  formState,
+  className,
+  onSubmit,
+  children,
+  onAdd,
+  buttonTitle,
+}) {
   const isNewFormActive = formState === 1;
   const isEditFormActive = formState === 2;
+
+  let container;
 
   if (isNewFormActive || isEditFormActive) {
     container = (
@@ -19,7 +45,12 @@ function Container({ formState, className, onSubmit, children }) {
       </form>
     );
   } else {
-    container = <div className={`form-section ${className}`}>{children}</div>;
+    container = (
+      <div className={`form-section ${className}`}>
+        {children}
+        <AddNewButton onAdd={onAdd} title={buttonTitle} />
+      </div>
+    );
   }
 
   return container;
@@ -32,15 +63,33 @@ export default function Card({
   buttonTitle,
   onSubmit,
   formState,
+  infoState,
+  handleDelete,
+  handleEdit,
   onAdd,
 }) {
   const isAddButtonActive = formState === 0;
 
   return (
-    <Container formState={formState} className={className} onSubmit={onSubmit}>
+    <Container
+      formState={formState}
+      className={className}
+      onSubmit={onSubmit}
+      buttonTitle={buttonTitle}
+      onAdd={onAdd}
+    >
       <h2>{title}</h2>
-      {children}
-      {isAddButtonActive && <AddNewButton onAdd={onAdd} title={buttonTitle} />}
+      {isAddButtonActive ? (
+        <>
+          <DisplayInputData
+            info={infoState}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
+        </>
+      ) : (
+        children
+      )}
     </Container>
   );
 }

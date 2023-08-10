@@ -6,7 +6,7 @@ function AddNewButton({ onAdd, title }) {
   );
 }
 
-function DisplayInputData({ info, handleDelete, handleEdit }) {
+function DataContainer({ info, handleDelete, handleEdit }) {
   return (
     info && (
       <ul>
@@ -81,7 +81,7 @@ export default function Card({
       <h2>{title}</h2>
       {isAddButtonActive ? (
         <>
-          <DisplayInputData
+          <DataContainer
             info={infoState}
             handleDelete={handleDelete}
             handleEdit={handleEdit}

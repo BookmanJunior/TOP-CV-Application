@@ -8,9 +8,9 @@ function AddNewButton({ onAdd, title }) {
 
 function DataContainer({ info, handleDelete, handleEdit }) {
   return (
-    info && (
+    info.length > 0 && (
       <ul>
-        {Object.values(info).map((i) => (
+        {info.map((i) => (
           <li key={i.id}>
             <button type="button" onClick={() => handleEdit(i.id)}>
               {i.name}
@@ -88,7 +88,7 @@ export default function Card({
           />
         </>
       ) : (
-        children
+        <>{children}</>
       )}
     </Container>
   );

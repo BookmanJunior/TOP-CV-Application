@@ -3,6 +3,27 @@ import { v4 as uuid } from "uuid";
 import Card from "./card";
 import InputField from "./inputField";
 
+const educationForm = [
+  {
+    title: "School Name",
+    placeholder: "Enter school name",
+    propToUpdate: "name",
+  },
+  { title: "Degree", placeholder: "Enter degree", propToUpdate: "degree" },
+  {
+    title: "Start Date",
+    placeholder: "Enter start date",
+    propToUpdate: "startDate",
+    type: "date",
+  },
+  {
+    title: "End Date",
+    placeholder: "Enter start data",
+    propToUpdate: "endDate",
+    type: "date",
+  },
+];
+
 export default function EducationInformation({
   information,
   setInformation,
@@ -10,27 +31,9 @@ export default function EducationInformation({
   setContainerState,
 }) {
   const [itemId, setItemId] = useState(null);
+  const [newItemId, setNewItemId] = useState(null);
+  const [copyOfExistingData, setCopy] = useState(null);
   const [form, setActiveForm] = useState(0);
-  const educationForm = [
-    {
-      title: "School Name",
-      placeholder: "Enter school name",
-      propToUpdate: "name",
-    },
-    { title: "Degree", placeholder: "Enter degree", propToUpdate: "degree" },
-    {
-      title: "Start Date",
-      placeholder: "Enter start date",
-      propToUpdate: "startDate",
-      type: "date",
-    },
-    {
-      title: "End Date",
-      placeholder: "Enter start data",
-      propToUpdate: "endDate",
-      type: "date",
-    },
-  ];
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -60,31 +63,51 @@ export default function EducationInformation({
 
     // setInformation({ ...information, education: updatedEducation });
     setItemId(null);
+    setNewItemId(null);
     setActiveForm(0);
   };
 
   const handleCancel = () => {
     // check if new item was added, if cancelled remove it
-    setInformation(itemId && information.filter((item) => item.id !== itemId));
+    if (newItemId) {
+      setInformation([...information.filter((item) => item.id !== newItemId)]);
+    } else if (itemId) {
+      // restore original state from a copy if edit was cancelled
+      setInformation(
+        information.map((item) => {
+          if (item.id === itemId) {
+            return { ...copyOfExistingData };
+          }
+          return { ...item };
+        })
+      );
+    }
     setItemId(null);
+    setNewItemId(null);
     setActiveForm(0);
   };
 
   const handleEdit = (eduId) => {
     const schoolToEdit = information.filter((item) => item.id === eduId)[0];
     setItemId(schoolToEdit.id);
+    setCopy({ ...schoolToEdit });
     setActiveForm(2);
   };
 
   const handleAdd = () => {
     const id = uuid();
     setInformation([...information, { id }]);
-    setItemId(id);
+    setNewItemId(id);
     setActiveForm(1);
   };
 
   const handleDelete = (id) => {
     setInformation([...information.filter((key) => key.id !== id)]);
+  };
+
+  const handleOnShow = () => {
+    handleCancel();
+    return containerState === 1 ? setContainerState(0) : setContainerState(1);
   };
 
   return (
@@ -95,15 +118,12 @@ export default function EducationInformation({
       onAdd={handleAdd}
       handleDelete={handleDelete}
       handleEdit={handleEdit}
-      handleCancel={handleCancel}
       formState={form}
       buttonTitle="Add School"
       infoState={information}
       expandable={true}
       containerState={containerState === 1}
-      onShow={() =>
-        containerState === 1 ? setContainerState(0) : setContainerState(1)
-      }
+      onShow={handleOnShow}
     >
       {educationForm.map((input) => (
         <InputField
@@ -114,7 +134,7 @@ export default function EducationInformation({
           infoState={information}
           setInfoState={setInformation}
           propToUpdate={input.propToUpdate}
-          itemId={itemId}
+          itemId={itemId === null ? newItemId : itemId}
           value={
             itemId &&
             information.filter((item) => itemId === item.id)[0][

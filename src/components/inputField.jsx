@@ -27,14 +27,24 @@ export default function InputField({
   return (
     <label>
       {title}
-      <input
-        type={type}
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        onInput={(e) => handleChange(e, propToUpdate)}
-        required
-      />
+      {type !== "textarea" ? (
+        <input
+          type={type}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onInput={(e) => handleChange(e, propToUpdate)}
+          required
+        />
+      ) : (
+        <textarea
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onInput={(e) => handleChange(e, propToUpdate)}
+          required
+        />
+      )}
     </label>
   );
 }

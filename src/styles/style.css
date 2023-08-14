@@ -1,0 +1,117 @@
+body {
+  background-color: #f3f4f6;
+}
+
+#root {
+  --size: 1em;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--size);
+  padding: var(--size);
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  margin: 0;
+}
+
+.output {
+  min-height: 90vh;
+}
+
+.output,
+.form-section,
+.data-section {
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  padding: var(--size);
+  background-color: white;
+}
+
+.form-section:is(:not(:last-child)),
+.data-section:is(:not(:last-child)) {
+  margin-bottom: var(--size);
+}
+
+input {
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+
+  & li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--size);
+
+    & button {
+      cursor: pointer;
+      width: 100%;
+      padding: 10px;
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.data-section,
+.form-section {
+  transition: max-height 200ms ease-in-out;
+  overflow: hidden;
+}
+
+:is(.data-section, .form-section)[aria-expanded="false"] {
+  max-height: 25px;
+}
+
+:is(.data-section, .form-section)[aria-expanded="true"] {
+  max-height: 400px;
+}
+
+:is(.data-section, .form-section)[aria-expanded="false"] .content {
+  visibility: hidden;
+  transition: visibility 100ms ease-in-out 50ms;
+}
+
+.container-header > button {
+  display: grid;
+  place-items: center;
+  border: none;
+  background-color: transparent;
+}
+
+:is(.data-section, .form-section) .container-header > button::after {
+  content: "";
+  width: 10px;
+  aspect-ratio: 1 / 1;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(135deg);
+  transition: transform 200ms ease-in-out;
+}
+
+:is(.data-section, .form-section)[aria-expanded="true"]
+  .container-header
+  > button::after {
+  transform: rotate(-45deg);
+}
+
+.container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}

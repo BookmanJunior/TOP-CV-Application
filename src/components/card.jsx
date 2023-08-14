@@ -35,10 +35,8 @@ function Container({
   const isNewFormActive = formState === 1;
   const isEditFormActive = formState === 2;
 
-  let container;
-
   if (isNewFormActive || isEditFormActive) {
-    container = (
+    return (
       <form
         className={`form-section ${className}`}
         onSubmit={onSubmit}
@@ -47,18 +45,12 @@ function Container({
         {children}
       </form>
     );
-  } else {
-    container = (
-      <div
-        className={`data-section ${className}`}
-        aria-expanded={containerState}
-      >
-        {children}
-      </div>
-    );
   }
-
-  return container;
+  return (
+    <div className={`data-section ${className}`} aria-expanded={containerState}>
+      {children}
+    </div>
+  );
 }
 
 export default function Card({

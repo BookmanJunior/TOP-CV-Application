@@ -37,6 +37,7 @@ export default function GeneralInformation({
       infoState={generalInformation}
       setInfoState={setGeneralInformation}
       formState={1}
+      containerState="true"
     >
       {generalInformationForm.map((input) => (
         <InputField

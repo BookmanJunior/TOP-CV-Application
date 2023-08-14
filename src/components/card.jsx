@@ -30,8 +30,7 @@ function Container({
   className,
   onSubmit,
   children,
-  onAdd,
-  buttonTitle,
+  containerState,
 }) {
   const isNewFormActive = formState === 1;
   const isEditFormActive = formState === 2;
@@ -40,15 +39,21 @@ function Container({
 
   if (isNewFormActive || isEditFormActive) {
     container = (
-      <form className={`form-section ${className}`} onSubmit={onSubmit}>
+      <form
+        className={`form-section ${className}`}
+        onSubmit={onSubmit}
+        aria-expanded={containerState}
+      >
         {children}
       </form>
     );
   } else {
     container = (
-      <div className={`form-section ${className}`}>
+      <div
+        className={`data-section ${className}`}
+        aria-expanded={containerState}
+      >
         {children}
-        <AddNewButton onAdd={onAdd} title={buttonTitle} />
       </div>
     );
   }
@@ -64,6 +69,9 @@ export default function Card({
   onSubmit,
   formState,
   infoState,
+  containerState = "false",
+  onShow,
+  expandable,
   handleDelete,
   handleEdit,
   onAdd,
@@ -77,19 +85,26 @@ export default function Card({
       onSubmit={onSubmit}
       buttonTitle={buttonTitle}
       onAdd={onAdd}
+      containerState={containerState}
     >
-      <h2>{title}</h2>
-      {isAddButtonActive ? (
-        <>
-          <DataContainer
-            info={infoState}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-          />
-        </>
-      ) : (
-        <>{children}</>
-      )}
+      <div className="container-header">
+        <h2>{title}</h2>
+        {expandable && <button type="button" onClick={onShow}></button>}
+      </div>
+      <div className="content">
+        {isAddButtonActive ? (
+          <>
+            <DataContainer
+              info={infoState}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+            />
+            <AddNewButton onAdd={onAdd} title={buttonTitle} />
+          </>
+        ) : (
+          children
+        )}
+      </div>
     </Container>
   );
 }

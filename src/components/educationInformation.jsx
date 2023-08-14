@@ -3,7 +3,12 @@ import { v4 as uuid } from "uuid";
 import Card from "./card";
 import InputField from "./inputField";
 
-export default function EducationInformation({ information, setInformation }) {
+export default function EducationInformation({
+  information,
+  setInformation,
+  containerState,
+  setContainerState,
+}) {
   const [itemId, setItemId] = useState(null);
   const [form, setActiveForm] = useState(0);
   const educationForm = [
@@ -94,6 +99,11 @@ export default function EducationInformation({ information, setInformation }) {
       formState={form}
       buttonTitle="Add School"
       infoState={information}
+      expandable={true}
+      containerState={containerState === 1}
+      onShow={() =>
+        containerState === 1 ? setContainerState(0) : setContainerState(1)
+      }
     >
       {educationForm.map((input) => (
         <InputField

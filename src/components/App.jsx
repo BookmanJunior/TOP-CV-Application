@@ -77,8 +77,9 @@ export default function App() {
               <div key={item.id}>
                 <p key={item.name}>{item.name}</p>
                 <p key={item.jobTitle}>{item.jobTitle}</p>
-                <p key={item.fromDate}>{item.fromDate}</p>
-                <p key={item.toDate}>{item.toDate}</p>
+                <p key={item.startDate}>{item.startDate}</p>
+                <p key={item.endDate}>{item.endDate}</p>
+                <p key={item.jobDescription}>{item.jobDescription}</p>
               </div>
             ))}
         </OutputCard>

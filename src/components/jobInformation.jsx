@@ -75,9 +75,9 @@ export default function Experience({
   };
 
   const handleEdit = (eduId) => {
-    const schoolToEdit = information.filter((item) => item.id === eduId)[0];
-    setItemId(schoolToEdit.id);
-    setCopy({ ...schoolToEdit });
+    const itemToEdit = information.filter((item) => item.id === eduId)[0];
+    setItemId(itemToEdit.id);
+    setCopy({ ...itemToEdit });
     setActiveForm(2);
   };
 

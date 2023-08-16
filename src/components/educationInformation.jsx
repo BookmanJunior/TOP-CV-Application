@@ -82,7 +82,9 @@ export default function EducationInformation({
 
   const handleOnShow = () => {
     handleCancel();
-    return containerState === 1 ? setContainerState(0) : setContainerState(1);
+    return containerState === 1
+      ? setContainerState(null)
+      : setContainerState(1);
   };
 
   return (

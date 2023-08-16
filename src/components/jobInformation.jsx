@@ -93,7 +93,9 @@ export default function Experience({
 
   const handleOnShow = () => {
     handleCancel();
-    return containerState === 2 ? setContainerState(0) : setContainerState(2);
+    return containerState === 2
+      ? setContainerState(null)
+      : setContainerState(2);
   };
 
   return (

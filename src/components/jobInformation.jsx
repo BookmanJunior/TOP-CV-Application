@@ -41,42 +41,41 @@ export default function Experience({
   containerState,
   setContainerState,
 }) {
-  const [itemId, setItemId] = useState(null);
-  const [newItemId, setNewItemId] = useState(null);
+  const [itemsId, setItemsId] = useState({ editItemId: null, newItemId: null });
   const [copyOfExistingData, setCopy] = useState(null);
   const [form, setActiveForm] = useState(0);
 
   const handleSave = (e) => {
     e.preventDefault();
 
-    setItemId(null);
-    setNewItemId(null);
+    setItemsId({ editItemId: null, newItemId: null });
     setActiveForm(0);
   };
 
   const handleCancel = () => {
     // check if new item was added, if cancelled remove it
-    if (newItemId) {
-      setInformation([...information.filter((item) => item.id !== newItemId)]);
-    } else if (itemId) {
+    if (itemsId.newItemId) {
+      setInformation([
+        ...information.filter((item) => item.id !== itemsId.newItemId),
+      ]);
+    } else if (itemsId.editItemId) {
       // restore original state from a copy if edit was cancelled
       setInformation(
         information.map((item) => {
-          if (item.id === itemId) {
+          if (item.id === itemsId.editItemId) {
             return { ...copyOfExistingData };
           }
           return { ...item };
         })
       );
     }
-    setItemId(null);
-    setNewItemId(null);
+    setItemsId({ editItemId: null, newItemId: null });
     setActiveForm(0);
   };
 
   const handleEdit = (eduId) => {
     const itemToEdit = information.filter((item) => item.id === eduId)[0];
-    setItemId(itemToEdit.id);
+    setItemsId({ ...itemsId, editItemId: itemToEdit.id });
     setCopy({ ...itemToEdit });
     setActiveForm(2);
   };
@@ -84,7 +83,7 @@ export default function Experience({
   const handleAdd = () => {
     const id = uuid();
     setInformation([...information, { id }]);
-    setNewItemId(id);
+    setItemsId({ ...itemsId, newItemId: id });
     setActiveForm(1);
   };
 
@@ -119,10 +118,12 @@ export default function Experience({
           type={input.type ?? "text"}
           placeholder={input.placeholder}
           propToUpdate={input.propToUpdate}
-          itemId={itemId === null ? newItemId : itemId}
+          itemId={
+            itemsId.editItemId === null ? itemsId.newItemId : itemsId.editItemId
+          }
           value={
-            itemId &&
-            information.filter((item) => itemId === item.id)[0][
+            itemsId.editItemId &&
+            information.filter((item) => itemsId.editItemId === item.id)[0][
               input.propToUpdate
             ]
           }

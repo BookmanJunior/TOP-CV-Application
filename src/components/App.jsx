@@ -37,6 +37,8 @@ export default function App() {
         <GeneralInformation
           generalInformation={information}
           setGeneralInformation={setInformation}
+          containerState={activeContainer}
+          setContainerState={setActiveContainer}
         />
         <EducationInformation
           information={education}

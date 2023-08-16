@@ -4,6 +4,8 @@ import Card from "./card";
 export default function GeneralInformation({
   generalInformation,
   setGeneralInformation,
+  containerState,
+  setContainerState,
 }) {
   const generalInformationForm = [
     {
@@ -30,6 +32,9 @@ export default function GeneralInformation({
     },
   ];
 
+  const handleOnShow = () =>
+    containerState === 0 ? setContainerState(null) : setContainerState(0);
+
   return (
     <Card
       className="general-information"
@@ -37,7 +42,9 @@ export default function GeneralInformation({
       infoState={generalInformation}
       setInfoState={setGeneralInformation}
       formState={1}
-      containerState="true"
+      containerState={containerState === 0}
+      expandable={true}
+      onShow={handleOnShow}
     >
       {generalInformationForm.map((input) => (
         <InputField

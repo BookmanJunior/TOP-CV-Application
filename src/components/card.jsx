@@ -88,9 +88,11 @@ export default function Card({
           onAdd={handleAdd}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onShow={handleOnShow}
           expandable={expandable}
           buttonTitle={buttonTitle}
           className={className}
+          title={title}
           containerState={containerState}
         />
       ) : (
@@ -99,10 +101,12 @@ export default function Card({
           setInformation={setInformation}
           onSubmit={handleSave}
           onCancel={handleCancel}
+          onShow={handleOnShow}
           containerState={containerState}
           sectionForm={sectionForm}
           itemsId={itemsId}
           className={className}
+          title={title}
         />
       )}
     </>

@@ -1,17 +1,12 @@
 import { useState } from "react";
 import OutputCard from "./outputCard";
-import GeneralInformation from "./generalInformation";
-import EducationInformation from "./educationInformation";
-import Experience from "./jobInformation";
+import InputContainer from "./inputContainer";
+import Card from "./card";
 
 export default function App() {
   const [information, setInformation] = useState([
     {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phoneNumber: "",
-      id: 0,
+      id: 1,
     },
   ]);
 
@@ -29,36 +24,70 @@ export default function App() {
   const [experience, setExperience] = useState([]);
   const [activeContainer, setActiveContainer] = useState(0);
 
-  const fullName = `${information[0].firstName} ${information[0].lastName}`;
+  const fullName = `${information[0]?.firstName ?? ""} ${
+    information[0].lastName ?? ""
+  }`;
+
+  const handleOnShow = (containerIndex) => {
+    setActiveContainer(
+      activeContainer === containerIndex ? null : containerIndex
+    );
+  };
 
   return (
     <>
-      <div className="forms">
-        <GeneralInformation
-          generalInformation={information}
-          setGeneralInformation={setInformation}
-          containerState={activeContainer}
-          setContainerState={setActiveContainer}
-        />
-        <EducationInformation
-          information={education}
-          setInformation={setEducation}
-          containerState={activeContainer}
-          setContainerState={setActiveContainer}
-        />
-        <Experience
-          information={experience}
-          setInformation={setExperience}
-          containerState={activeContainer}
-          setContainerState={setActiveContainer}
-        />
+      <div className="input-section">
+        <InputContainer
+          className={"general-information"}
+          title="General Information"
+          containerIndex={0}
+          containerState={activeContainer === 0}
+          onShow={handleOnShow}
+        >
+          <Card
+            information={information}
+            setInformation={setInformation}
+            sectionForm="generalForm"
+            initialFormState="opened"
+            initialItem={1}
+            expandable={false}
+          />
+        </InputContainer>
+        <InputContainer
+          className={"education-information"}
+          title="Education"
+          containerIndex={1}
+          containerState={activeContainer === 1}
+          onShow={handleOnShow}
+        >
+          <Card
+            buttonTitle="Add School"
+            information={education}
+            setInformation={setEducation}
+            sectionForm="educationForm"
+          />
+        </InputContainer>
+        <InputContainer
+          className={"experience-information"}
+          title="Experience"
+          containerIndex={2}
+          containerState={activeContainer === 2}
+          onShow={handleOnShow}
+        >
+          <Card
+            buttonTitle="Add Job"
+            information={experience}
+            setInformation={setExperience}
+            sectionForm="experienceForm"
+          />
+        </InputContainer>
       </div>
-      <div className="output">
+      <div className="output-section">
         <OutputCard
           className="general-information-card"
           title="General Information"
         >
-          <p>{fullName}</p>
+          <p>{fullName && fullName}</p>
           <p>{information[0].email}</p>
           <p>{information[0].phoneNumber}</p>
         </OutputCard>
@@ -78,6 +107,7 @@ export default function App() {
             experience.map((item) => (
               <div key={item.id}>
                 <p key={item.name}>{item.name}</p>
+                <p key={item.degree}>{item.degree}</p>
                 <p key={item.jobTitle}>{item.jobTitle}</p>
                 <p key={item.startDate}>{item.startDate}</p>
                 <p key={item.endDate}>{item.endDate}</p>

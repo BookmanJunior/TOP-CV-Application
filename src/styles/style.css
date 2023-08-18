@@ -17,11 +17,11 @@ h2 {
   margin: 0;
 }
 
-.output {
+.output-section {
   min-height: 90vh;
 }
 
-.output,
+.output-section,
 .form-section,
 .data-section {
   border-radius: 5px;
@@ -69,7 +69,7 @@ label {
 
 .data-section,
 .form-section {
-  transition: max-height 200ms ease-in-out;
+  transition: max-height 300ms ease-in-out;
   overflow: hidden;
 }
 
@@ -78,7 +78,8 @@ label {
 }
 
 :is(.data-section, .form-section)[aria-expanded="true"] {
-  max-height: 400px;
+  transition-delay: 100ms;
+  max-height: 800px;
 }
 
 :is(.data-section, .form-section)[aria-expanded="false"] .content {

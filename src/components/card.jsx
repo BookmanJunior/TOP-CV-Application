@@ -4,27 +4,22 @@ import InputCard from "./inputCard";
 import DataCard from "./dataCard";
 
 export default function Card({
-  className,
-  title,
   buttonTitle,
   information,
   setInformation,
-  containerIndex,
-  setContainerState,
   sectionForm,
   initialFormState = "closed",
-  containerState = false,
   initialItem = null,
   expandable = true,
 }) {
+  const copyOfInitialItem =
+    initialItem && information.filter((item) => item.id === initialItem)[0];
+
   const [itemsId, setItemsId] = useState({
     editItemId: initialItem,
     newItemId: null,
   });
   const [form, setActiveForm] = useState(initialFormState);
-
-  const copyOfInitialItem =
-    initialItem && information.filter((item) => item.id === initialItem)[0];
   const [copyOfExistingData, setCopy] = useState(copyOfInitialItem);
 
   const isAddButtonActive = form === "closed";
@@ -75,11 +70,6 @@ export default function Card({
     setInformation([...information.filter((key) => key.id !== id)]);
   };
 
-  const handleOnShow = () => {
-    const newContainerState = containerState ? null : containerIndex;
-    setContainerState(newContainerState);
-  };
-
   return (
     <>
       {isAddButtonActive ? (
@@ -88,12 +78,8 @@ export default function Card({
           onAdd={handleAdd}
           onDelete={handleDelete}
           onEdit={handleEdit}
-          onShow={handleOnShow}
           expandable={expandable}
           buttonTitle={buttonTitle}
-          className={className}
-          title={title}
-          containerState={containerState}
         />
       ) : (
         <InputCard
@@ -101,12 +87,8 @@ export default function Card({
           setInformation={setInformation}
           onSubmit={handleSave}
           onCancel={handleCancel}
-          onShow={handleOnShow}
-          containerState={containerState}
           sectionForm={sectionForm}
           itemsId={itemsId}
-          className={className}
-          title={title}
         />
       )}
     </>

@@ -1,3 +1,5 @@
+import { ReactComponent as Delete } from "../assets/delete-icon.svg";
+
 export default function DataCard({
   info,
   onAdd,
@@ -7,7 +9,7 @@ export default function DataCard({
   buttonTitle,
 }) {
   return (
-    <div>
+    <>
       {info.length > 0 && (
         <ul>
           {info.map((i) => (
@@ -18,7 +20,7 @@ export default function DataCard({
               </button>
               {expandable && (
                 <button type="button" onClick={() => onDelete(i.id)}>
-                  Delete
+                  <Delete />
                 </button>
               )}
             </li>
@@ -26,13 +28,18 @@ export default function DataCard({
         </ul>
       )}
       {expandable && <AddNewButton onAdd={onAdd} title={buttonTitle} />}
-    </div>
+    </>
   );
 }
 
 function AddNewButton({ onAdd, title }) {
   return (
-    <button key={title} type="button" onClick={onAdd}>
+    <button
+      className="add-button primary-color"
+      key={title}
+      type="button"
+      onClick={onAdd}
+    >
       {title}
     </button>
   );

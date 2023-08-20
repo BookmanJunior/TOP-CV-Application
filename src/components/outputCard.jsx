@@ -1,7 +1,7 @@
 export default function OutputCard({ title, className, children }) {
   return (
     <div className={`output-card ${className}`}>
-      <h2>{title}</h2>
+      {title && <h3 className="output-card-title">{title}</h3>}
       {children}
     </div>
   );

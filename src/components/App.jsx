@@ -83,34 +83,45 @@ export default function App() {
         </InputContainer>
       </div>
       <div className="output-section">
-        <OutputCard
-          className="general-information-card"
-          title="General Information"
-        >
-          <p>{fullName && fullName}</p>
-          <p>{information[0].email}</p>
-          <p>{information[0].phoneNumber}</p>
+        <OutputCard className="general-information-card">
+          <h1>{fullName && fullName}</h1>
+          <div className="general-info">
+            <p>{information[0].email}</p>
+            <p>{information[0].phoneNumber}</p>
+            <p>{information[0].location}</p>
+          </div>
         </OutputCard>
         <OutputCard className="education-information-card" title="Education">
           {education.length >= 1 &&
             education.map((item) => (
-              <div key={item.id}>
-                <p key={item.name}>{item.name}</p>
+              <div key={item.id} className="output-card-content">
+                <h4 key={item.name}>{item.name}</h4>
                 <p key={item.degree}>{item.degree}</p>
-                <p key={item.startDate}>{item.startDate}</p>
-                <p key={item.endDate}>{item.endDate}</p>
+                {item.startDate && (
+                  <h4 className="full-date">{`${item.startDate ?? ""} - ${
+                    item.endDate ?? ""
+                  }`}</h4>
+                )}
+                <p className="location-info" key={item.location}>
+                  {item.location}
+                </p>
               </div>
             ))}
         </OutputCard>
         <OutputCard className="experience-information-card" title="Experience">
           {experience.length >= 1 &&
             experience.map((item) => (
-              <div key={item.id}>
-                <p key={item.name}>{item.name}</p>
-                <p key={item.degree}>{item.degree}</p>
+              <div key={item.id} className="output-card-content">
+                <h4 key={item.name}>{item.name}</h4>
                 <p key={item.jobTitle}>{item.jobTitle}</p>
-                <p key={item.startDate}>{item.startDate}</p>
-                <p key={item.endDate}>{item.endDate}</p>
+                {item.startDate && (
+                  <h4 className="full-date">{`${item.startDate ?? ""} - ${
+                    item.endDate ?? ""
+                  }`}</h4>
+                )}
+                <p className="location-info" key={item.location}>
+                  {item.location}
+                </p>
                 <p key={item.jobDescription}>{item.jobDescription}</p>
               </div>
             ))}

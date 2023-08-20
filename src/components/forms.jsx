@@ -21,6 +21,11 @@ const generalForm = [
     propToUpdate: "phoneNumber",
     type: "tel",
   },
+  {
+    title: "Location",
+    placeholder: "Enter Your Location",
+    propToUpdate: "location",
+  },
 ];
 
 const educationForm = [
@@ -34,13 +39,16 @@ const educationForm = [
     title: "Start Date",
     placeholder: "Enter start date",
     propToUpdate: "startDate",
-    type: "date",
   },
   {
     title: "End Date",
     placeholder: "Enter start data",
     propToUpdate: "endDate",
-    type: "date",
+  },
+  {
+    title: "Location",
+    placeholder: "Enter Location",
+    propToUpdate: "location",
   },
 ];
 
@@ -59,13 +67,16 @@ const experienceForm = [
     title: "Start Date",
     placeholder: "Enter start date",
     propToUpdate: "startDate",
-    type: "date",
   },
   {
     title: "End Date",
     placeholder: "Enter start data",
     propToUpdate: "endDate",
-    type: "date",
+  },
+  {
+    title: "Location",
+    placeholder: "Enter Location",
+    propToUpdate: "location",
   },
   {
     title: "Job Description",

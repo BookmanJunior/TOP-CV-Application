@@ -36,6 +36,11 @@ const educationForm = [
   },
   { title: "Degree", placeholder: "Enter degree", propToUpdate: "degree" },
   {
+    title: "Details",
+    placeholder: "Enter bullet point",
+    propToUpdate: "details",
+  },
+  {
     title: "Start Date",
     placeholder: "Enter start date",
     propToUpdate: "startDate",
@@ -62,6 +67,11 @@ const experienceForm = [
     title: "Job title",
     placeholder: "Enter Job Title",
     propToUpdate: "jobTitle",
+  },
+  {
+    title: "Details",
+    placeholder: "Enter bullet point",
+    propToUpdate: "details",
   },
   {
     title: "Start Date",

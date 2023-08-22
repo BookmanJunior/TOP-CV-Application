@@ -61,7 +61,10 @@ export default function Card({
 
   const handleAdd = () => {
     const id = uuid();
-    setInformation([...information, { id }]);
+    setInformation([
+      ...information,
+      { id, details: [{ id: uuid(), point: "" }] },
+    ]);
     setItemsId({ ...itemsId, newItemId: id });
     setActiveForm("opened");
   };

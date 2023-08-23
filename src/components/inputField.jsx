@@ -16,6 +16,7 @@ export default function InputField({
       : title;
 
   const newBulletPoint = { id: uuid(), point: "" };
+  const parentObject = infoState.filter((item) => item.id === itemId)[0];
 
   const handleMoreBulletPoints = () => {
     setInfoState(
@@ -40,10 +41,9 @@ export default function InputField({
     );
   };
 
-  const handleBulletPointChange = (e, pointItemId) => {
-    const infoObject = infoState.filter((item) => item.id === itemId)[0];
-    const updatedObject = infoObject.details.map((item) => {
-      if (item.id === pointItemId) {
+  const handleBulletPointChange = (e, bulletPointItemId) => {
+    const updatedObject = parentObject.details.map((item) => {
+      if (item.id === bulletPointItemId) {
         return { ...item, point: e.target.value };
       }
       return { ...item };
@@ -59,8 +59,7 @@ export default function InputField({
   };
 
   const handleDelete = (bulletPointItemId) => {
-    const infoObject = infoState.filter((item) => item.id === itemId)[0];
-    const updatedObject = infoObject.details.filter(
+    const updatedObject = parentObject.details.filter(
       (item) => item.id !== bulletPointItemId
     );
     setInfoState(
@@ -80,20 +79,13 @@ export default function InputField({
         infoState.map(
           (item) =>
             item.details &&
-            item.details.map((point) => (
-              <>
-                <input
-                  key={point.id}
-                  type={type}
-                  name={name}
-                  value={value}
-                  placeholder={placeholder}
-                  onInput={(e) => handleBulletPointChange(e, point.id)}
-                />
-                <button type="button" onClick={() => handleDelete(point.id)}>
-                  Delete
-                </button>
-              </>
+            item.details.map((bulletPoint) => (
+              <BulletPointInput
+                key={bulletPoint.id}
+                item={bulletPoint}
+                onChange={handleBulletPointChange}
+                onDelete={handleDelete}
+              />
             ))
         )
       ) : (
@@ -112,5 +104,21 @@ export default function InputField({
         </button>
       )}
     </label>
+  );
+}
+
+function BulletPointInput({ item, onChange, onDelete }) {
+  return (
+    <>
+      <input
+        value={item.point}
+        name={item.id}
+        placeholder="Enter details"
+        onInput={(e) => onChange(e, item.id)}
+      />
+      <button type="button" onClick={() => onDelete(item.id)}>
+        Delete
+      </button>
+    </>
   );
 }

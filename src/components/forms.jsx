@@ -88,12 +88,6 @@ const experienceForm = [
     placeholder: "Enter Location",
     propToUpdate: "location",
   },
-  {
-    title: "Job Description",
-    placeholder: "Enter Job Description",
-    propToUpdate: "jobDescription",
-    type: "textarea",
-  },
 ];
 
 const Forms = {

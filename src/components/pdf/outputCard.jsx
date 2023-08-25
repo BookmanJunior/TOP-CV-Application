@@ -57,7 +57,9 @@ function LeftSideContainer({ info, children }) {
   return (
     <View style={styles.contentContainer}>
       <Text style={{ fontWeight: 700 }}>{info.name}</Text>
-      <Text style={{ fontStyle: "italic" }}>{info.degree ?? info.job}</Text>
+      <Text style={{ fontStyle: "italic" }}>
+        {info.degree ?? info.jobTitle}
+      </Text>
       {children}
     </View>
   );

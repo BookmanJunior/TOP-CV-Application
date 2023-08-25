@@ -1,3 +1,28 @@
+const dates = [
+  {
+    title: "Start Date",
+    placeholder: "Enter start date",
+    propToUpdate: "startDate",
+  },
+  {
+    title: "End Date",
+    placeholder: "Enter start data",
+    propToUpdate: "endDate",
+  },
+];
+
+const location = {
+  title: "Location",
+  placeholder: "Enter Location",
+  propToUpdate: "location",
+};
+
+const bulletPoints = {
+  title: "Details",
+  placeholder: "Enter bullet point",
+  propToUpdate: "details",
+};
+
 const generalForm = [
   {
     title: "First Name",
@@ -35,26 +60,9 @@ const educationForm = [
     propToUpdate: "name",
   },
   { title: "Degree", placeholder: "Enter degree", propToUpdate: "degree" },
-  {
-    title: "Details",
-    placeholder: "Enter bullet point",
-    propToUpdate: "details",
-  },
-  {
-    title: "Start Date",
-    placeholder: "Enter start date",
-    propToUpdate: "startDate",
-  },
-  {
-    title: "End Date",
-    placeholder: "Enter start data",
-    propToUpdate: "endDate",
-  },
-  {
-    title: "Location",
-    placeholder: "Enter Location",
-    propToUpdate: "location",
-  },
+  bulletPoints,
+  ...dates,
+  location,
 ];
 
 const experienceForm = [
@@ -68,32 +76,36 @@ const experienceForm = [
     placeholder: "Enter Job Title",
     propToUpdate: "jobTitle",
   },
+  bulletPoints,
+  ...dates,
+  location,
+];
+
+const projectForm = [
   {
-    title: "Details",
-    placeholder: "Enter bullet point",
-    propToUpdate: "details",
+    title: "Project Name",
+    placeholder: "Enter Project Name",
+    propToUpdate: "name",
   },
   {
-    title: "Start Date",
-    placeholder: "Enter start date",
-    propToUpdate: "startDate",
+    title: "Your role in the project",
+    placeholder: "Enter your role",
+    propToUpdate: "jobTitle",
   },
   {
-    title: "End Date",
-    placeholder: "Enter start data",
-    propToUpdate: "endDate",
+    title: "Technologies Used",
+    placeholder: "HTML, CSS, React",
+    propToUpdate: "technologies",
   },
-  {
-    title: "Location",
-    placeholder: "Enter Location",
-    propToUpdate: "location",
-  },
+  bulletPoints,
+  ...dates,
 ];
 
 const Forms = {
   generalForm,
   educationForm,
   experienceForm,
+  projectForm,
 };
 
 export default Forms;

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 export default function InfoSection({ info, title }) {
   return (
     <View style={styles.body}>
-      <Header title={title} />
+      {info.length > 0 && <Header title={title} />}
       {info.map((i) => (
         <View key={i.id} style={styles.container}>
           <LeftSideContainer info={i}>

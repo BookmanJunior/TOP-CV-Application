@@ -18,23 +18,23 @@ export default function InputField({
   const newBulletPoint = { id: uuid(), point: "" };
   const parentObject = infoState.filter((item) => item.id === itemId)[0];
 
-  const handleMoreBulletPoints = () => {
+  const handleChange = (e, updateProp) => {
     setInfoState(
       infoState.map((item) => {
         if (item.id === itemId) {
-          const updatedDetails = [...item.details, newBulletPoint];
-          return { ...item, details: updatedDetails };
+          return { ...item, [updateProp]: e.target.value };
         }
         return { ...item };
       })
     );
   };
 
-  const handleChange = (e, updateProp) => {
+  const handleBulletPointAdd = () => {
     setInfoState(
       infoState.map((item) => {
         if (item.id === itemId) {
-          return { ...item, [updateProp]: e.target.value };
+          const updatedDetails = [...item.details, newBulletPoint];
+          return { ...item, details: updatedDetails };
         }
         return { ...item };
       })
@@ -48,6 +48,7 @@ export default function InputField({
       }
       return { ...item };
     });
+
     setInfoState(
       infoState.map((item) => {
         if (item.id === itemId) {
@@ -58,7 +59,7 @@ export default function InputField({
     );
   };
 
-  const handleDelete = (bulletPointItemId) => {
+  const handleBulletPointDeletion = (bulletPointItemId) => {
     const updatedObject = parentObject.details.filter(
       (item) => item.id !== bulletPointItemId
     );
@@ -72,37 +73,38 @@ export default function InputField({
     );
   };
 
-  return (
-    <label>
+  // TODO:
+  // FigureOut how to simplify the below code
+
+  return title === "Details" ? (
+    <label className="bullet-points">
       {title}
-      {title === "Details" ? (
-        infoState.map(
-          (item) =>
-            item.details &&
-            item.details.map((bulletPoint) => (
-              <BulletPointInput
-                key={bulletPoint.id}
-                item={bulletPoint}
-                onChange={handleBulletPointChange}
-                onDelete={handleDelete}
-              />
-            ))
-        )
-      ) : (
-        <input
-          type={type}
-          name={name}
-          value={value}
-          placeholder={placeholder}
-          onInput={(e) => handleChange(e, propToUpdate)}
-          required
-        />
+      {infoState.map(
+        (item) =>
+          item.id === itemId &&
+          item.details.map((bulletPoint) => (
+            <BulletPointInput
+              key={bulletPoint.id}
+              item={bulletPoint}
+              onChange={handleBulletPointChange}
+              onDelete={handleBulletPointDeletion}
+            />
+          ))
       )}
-      {title === "Details" && (
-        <button type="button" onClick={handleMoreBulletPoints}>
-          Add More
-        </button>
-      )}
+      <button type="button" onClick={handleBulletPointAdd}>
+        Add More
+      </button>
+    </label>
+  ) : (
+    <label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onInput={(e) => handleChange(e, propToUpdate)}
+        required
+      />
     </label>
   );
 }
@@ -110,7 +112,7 @@ export default function InputField({
 function BulletPointInput({ item, onChange, onDelete }) {
   return (
     <>
-      <input
+      <textarea
         value={item.point}
         name={item.id}
         placeholder="Enter details"

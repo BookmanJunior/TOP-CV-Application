@@ -97,6 +97,7 @@ export default function InputField({
     </label>
   ) : (
     <label>
+      {title}
       <input
         type={type}
         name={name}

@@ -30,14 +30,16 @@ export default function InputCard({
           value={editItem && editItem[input.propToUpdate]}
         />
       ))}
-      <button className="save-button primary-color">Save</button>
-      <button
-        className="cancel-button accent-color"
-        type="button"
-        onClick={onCancel}
-      >
-        Cancel
-      </button>
+      <div className="form-buttons">
+        <button className="save-button primary-color">Save</button>
+        <button
+          className="cancel-button accent-color"
+          type="button"
+          onClick={onCancel}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

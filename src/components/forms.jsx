@@ -51,6 +51,16 @@ const generalForm = [
     placeholder: "Enter Your Location",
     propToUpdate: "location",
   },
+  {
+    title: "Linkedin",
+    propToUpdate: "linkedin",
+    type: "url",
+  },
+  {
+    title: "Github",
+    propToUpdate: "github",
+    type: "url",
+  },
 ];
 
 const educationForm = [

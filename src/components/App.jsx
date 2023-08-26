@@ -2,10 +2,16 @@ import { useState } from "react";
 import OutputCard from "./outputCard";
 import InputContainer from "./inputContainer";
 import Card from "./card";
+import OutputHeader from "./outputHeader";
 
 export default function App() {
   const [information, setInformation] = useState([
     {
+      firstName: "Azam",
+      lastName: "Gulov",
+      email: "gulovazam@gmail.com",
+      phoneNumber: "+9929793838",
+      location: "Dushanbe, Tajikistan",
       id: 1,
     },
   ]);
@@ -15,18 +21,17 @@ export default function App() {
       // for testing purposes
       name: "Test University",
       degree: "Computer Science",
-      startDate: "2015-01-09",
-      endDate: "2019-05-05",
+      startDate: "Sep. 2015",
+      endDate: "Sep. 2019",
+      location: "Tokyo, Japan",
       id: "877364ee-2950-49f1-bc54-a6642c643b3f",
+      details: [],
     },
   ]);
 
   const [experience, setExperience] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [activeContainer, setActiveContainer] = useState(0);
-
-  const fullName = `${information[0]?.firstName ?? ""} ${
-    information[0].lastName ?? ""
-  }`;
 
   const handleOnShow = (containerIndex) => {
     setActiveContainer(
@@ -36,7 +41,7 @@ export default function App() {
 
   return (
     <>
-      <div className="input-section">
+      <section className="input-section">
         <InputContainer
           className={"general-information"}
           title="General Information"
@@ -81,52 +86,27 @@ export default function App() {
             sectionForm="experienceForm"
           />
         </InputContainer>
-      </div>
-      <div className="output-section">
-        <OutputCard className="general-information-card">
-          <h1>{fullName && fullName}</h1>
-          <div className="general-info">
-            <p>{information[0].email}</p>
-            <p>{information[0].phoneNumber}</p>
-            <p>{information[0].location}</p>
-          </div>
-        </OutputCard>
-        <OutputCard className="education-information-card" title="Education">
-          {education.length >= 1 &&
-            education.map((item) => (
-              <div key={item.id} className="output-card-content">
-                <h4 key={item.name}>{item.name}</h4>
-                <p key={item.degree}>{item.degree}</p>
-                {item.startDate && (
-                  <h4 className="full-date">{`${item.startDate ?? ""} - ${
-                    item.endDate ?? ""
-                  }`}</h4>
-                )}
-                <p className="location-info" key={item.location}>
-                  {item.location}
-                </p>
-              </div>
-            ))}
-        </OutputCard>
-        <OutputCard className="experience-information-card" title="Experience">
-          {experience.length >= 1 &&
-            experience.map((item) => (
-              <div key={item.id} className="output-card-content">
-                <h4 key={item.name}>{item.name}</h4>
-                <p key={item.jobTitle}>{item.jobTitle}</p>
-                {item.startDate && (
-                  <h4 className="full-date">{`${item.startDate ?? ""} - ${
-                    item.endDate ?? ""
-                  }`}</h4>
-                )}
-                <p className="location-info" key={item.location}>
-                  {item.location}
-                </p>
-                <p key={item.jobDescription}>{item.jobDescription}</p>
-              </div>
-            ))}
-        </OutputCard>
-      </div>
+        <InputContainer
+          className="project-information"
+          title="Projects"
+          containerIndex={3}
+          containerState={activeContainer === 3}
+          onShow={handleOnShow}
+        >
+          <Card
+            buttonTitle="Add Projects"
+            information={projects}
+            setInformation={setProjects}
+            sectionForm="projectForm"
+          />
+        </InputContainer>
+      </section>
+      <section className="output-section">
+        <OutputHeader generalInformation={information} />
+        <OutputCard title="Education" info={education} />
+        <OutputCard title="Experience" info={experience} />
+        <OutputCard title="Projects" info={projects} />
+      </section>
     </>
   );
 }

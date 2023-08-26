@@ -77,8 +77,7 @@ export default function InputField({
   // FigureOut how to simplify the below code
 
   return title === "Details" ? (
-    <label className="bullet-points">
-      {title}
+    <div className="bullet-points">
       {infoState.map(
         (item) =>
           item.id === itemId &&
@@ -86,6 +85,7 @@ export default function InputField({
             <BulletPointInput
               key={bulletPoint.id}
               item={bulletPoint}
+              title={title}
               onChange={handleBulletPointChange}
               onDelete={handleBulletPointDeletion}
             />
@@ -94,34 +94,38 @@ export default function InputField({
       <button type="button" onClick={handleBulletPointAdd}>
         Add More
       </button>
-    </label>
+    </div>
   ) : (
-    <label>
-      {title}
+    <div className="input-container">
       <input
         type={type}
         name={name}
         value={value}
         placeholder={placeholder}
         onInput={(e) => handleChange(e, propToUpdate)}
+        className="input-field"
         required
       />
-    </label>
+      <span>{title}</span>
+    </div>
   );
 }
 
-function BulletPointInput({ item, onChange, onDelete }) {
+function BulletPointInput({ item, title, onChange, onDelete }) {
   return (
-    <>
+    <div className="input-container bullet-point">
       <textarea
         value={item.point}
         name={item.id}
         placeholder="Enter details"
         onInput={(e) => onChange(e, item.id)}
+        className="input-field"
       />
+      <span>{title}</span>
+
       <button type="button" onClick={() => onDelete(item.id)}>
         Delete
       </button>
-    </>
+    </div>
   );
 }

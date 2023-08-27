@@ -54,11 +54,13 @@ const generalForm = [
   {
     title: "Linkedin",
     propToUpdate: "linkedin",
+    placeholder: "",
     type: "url",
   },
   {
     title: "Github",
     propToUpdate: "github",
+    placeholder: "",
     type: "url",
   },
 ];

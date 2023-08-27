@@ -10,7 +10,9 @@ export default function OutputHeader({ generalInformation }) {
 
 function HeaderTitle({ generalInformation }) {
   return generalInformation.map((item) => (
-    <h1 key={item.firstName}>{`${item.firstName} ${item.lastName}`}</h1>
+    <h1 key={item.firstName}>{`${item.firstName ?? ""} ${
+      item.lastName ?? ""
+    }`}</h1>
   ));
 }
 
@@ -27,7 +29,7 @@ function HeaderContent({ generalInformation }) {
 function Links({ generalInformation }) {
   return generalInformation.map((item) => (
     <div className="header-links" key={"links"}>
-      <p>{item.linkedin}</p>
+      {item.linkedin && <p>{item.linkedin}</p>}
       <p>{item.github}</p>
     </div>
   ));

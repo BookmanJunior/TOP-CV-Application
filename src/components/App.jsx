@@ -5,33 +5,33 @@ import Card from "./card";
 import OutputHeader from "./outputHeader";
 
 export default function App() {
-  const [information, setInformation] = useState([
-    {
-      firstName: "Azam",
-      lastName: "Gulov",
-      email: "gulovazam@gmail.com",
-      phoneNumber: "+9929793838",
-      location: "Dushanbe, Tajikistan",
-      id: 1,
-    },
-  ]);
+  const loadStorageData = (key) => {
+    const data = JSON.parse(localStorage.getItem("userInfo"));
+    return data?.[key];
+  };
 
-  const [education, setEducation] = useState([
-    {
-      // for testing purposes
-      name: "Test University",
-      degree: "Computer Science",
-      startDate: "Sep. 2015",
-      endDate: "Sep. 2019",
-      location: "Tokyo, Japan",
-      id: "877364ee-2950-49f1-bc54-a6642c643b3f",
-      details: [],
-    },
-  ]);
+  const [information, setInformation] = useState(
+    loadStorageData("information") ?? [
+      {
+        id: 1,
+      },
+    ]
+  );
 
-  const [experience, setExperience] = useState([]);
-  const [projects, setProjects] = useState([]);
+  const [education, setEducation] = useState(
+    loadStorageData("education") ?? []
+  );
+
+  const [experience, setExperience] = useState(
+    loadStorageData("experience") ?? []
+  );
+  const [projects, setProjects] = useState(loadStorageData("projects") ?? []);
   const [activeContainer, setActiveContainer] = useState(0);
+
+  localStorage.setItem(
+    "userInfo",
+    JSON.stringify({ information, education, experience, projects })
+  );
 
   const handleOnShow = (containerIndex) => {
     setActiveContainer(

@@ -6,6 +6,8 @@
   --accent: #3e84c1;
   --gray: #808080;
   --white: #ffffff;
+  --valid: #6dac50;
+  --invalid: #ca4c4c;
 }
 
 /* css reset */
@@ -105,6 +107,41 @@ button {
   max-width: 600px;
 }
 
+.input-field {
+  padding: var(--input-size);
+  border: 1px solid var(--gray);
+}
+
+.input-container {
+  display: grid;
+}
+
+.input-container > :is(.input-field, span) {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.input-container span {
+  pointer-events: none;
+  align-self: center;
+  margin-inline: var(--input-size);
+  padding-inline: var(--input-size);
+
+  width: max-content;
+  transition:
+    transform 200ms ease-out,
+    scale 50ms ease-in;
+}
+
+.bullet-point {
+  position: relative;
+}
+
+textarea + span {
+  position: absolute;
+  top: 10px;
+}
+
 .container-content ul {
   list-style: none;
 }
@@ -169,7 +206,7 @@ form {
 
 :is(.data-section, .form-section)[aria-expanded="true"] {
   transition-delay: 100ms;
-  max-height: 800px;
+  max-height: 100vh;
 }
 
 :is(.data-section, .form-section)[aria-expanded="false"] .content {
@@ -250,32 +287,7 @@ ul.output-bullet-points {
   gap: 0.6em;
 }
 
-/* input field styles */
-.input-field {
-  padding: var(--input-size);
-  border: 1px solid var(--gray);
-}
-
-.input-container {
-  display: grid;
-}
-
-.input-container > :is(.input-field, span) {
-  grid-row: 1;
-  grid-column: 1;
-}
-
-.input-container span {
-  pointer-events: none;
-  align-self: center;
-  margin-inline: var(--input-size);
-  padding-inline: var(--input-size);
-
-  width: max-content;
-  transition:
-    transform 200ms ease-out,
-    scale 50ms ease-in;
-}
+/* input validation styles */
 
 .input-field:focus {
   outline: 1px solid var(--accent);
@@ -285,18 +297,10 @@ ul.output-bullet-points {
 .input-field::placeholder {
   opacity: 0;
 }
-.input-field:placeholder-shown + span {
-  background-color: transparent;
-  color: var(--gray);
-}
-.input-container span,
-.input-field:placeholder-shown:focus + span {
-  color: var(--accent);
-  background-color: var(--white);
-}
 
-.input-field:not(:placeholder-shown, :focus) + span {
-  color: var(--gray);
+.input-field:focus + span,
+.input-field:not(:placeholder-shown) + span {
+  background-color: var(--white);
 }
 
 .input-field:not(:placeholder-shown) + span,
@@ -305,17 +309,37 @@ ul.output-bullet-points {
   scale: 0.9;
 }
 
-.bullet-point {
-  position: relative;
-}
-
-textarea + span {
-  position: absolute;
-  top: 10px;
-}
-
 .input-field:not(:placeholder-shown):focus + span {
   visibility: visible;
+}
+
+.input-field:invalid,
+.input-field:invalid + span {
+  border-color: var(--invalid);
+  color: var(--invalid);
+  outline-color: var(--invalid);
+}
+
+.input-field:valid,
+.input-field:valid + span,
+.input-field:valid:focus {
+  border-color: var(--valid);
+  color: var(--valid);
+  outline-color: var(--valid);
+}
+
+.input-field:is(:invalid, :valid):placeholder-shown,
+.input-field:is(:invalid, :valid):placeholder-shown + span {
+  border-color: var(--gray);
+  outline-color: var(--gray);
+  color: var(--gray);
+}
+
+.input-field:is(:invalid, :valid):focus:placeholder-shown,
+.input-field:is(:invalid, :valid):focus:placeholder-shown + span {
+  border-color: var(--accent);
+  outline-color: var(--accent);
+  color: var(--accent);
 }
 
 /* utility classes */

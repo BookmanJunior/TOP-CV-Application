@@ -9,6 +9,7 @@ export default function InputField({
   setInfoState,
   itemId,
   propToUpdate,
+  required,
 }) {
   const name =
     title.split(" ").length >= 2
@@ -104,7 +105,7 @@ export default function InputField({
         placeholder={placeholder}
         onInput={(e) => handleChange(e, propToUpdate)}
         className="input-field"
-        required
+        required={required}
       />
       <span>{title}</span>
     </div>

@@ -28,6 +28,7 @@ export default function InputCard({
             itemsId.editItemId === null ? itemsId.newItemId : itemsId.editItemId
           }
           value={editItem && editItem[input.propToUpdate]}
+          required={input?.required ?? false}
         />
       ))}
       <div className="form-buttons">

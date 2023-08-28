@@ -1,37 +1,49 @@
-export default function OutputCard({ title, className, info }) {
+function OutputCard({ title, info, children }) {
   return (
-    <div className={`output-card ${className}`}>
+    <div className={`output-card`}>
       {info.length > 0 && <Header title={title} />}
+      {children}
+    </div>
+  );
+}
+
+function GenericOutputCard({ title, info }) {
+  return (
+    <OutputCard title={title} info={info}>
       {info.map((i) => (
         <div className="output-content-container" key={i.id}>
-          <LeftSideContainer info={i} />
-          {i.details && <BulletPoints info={i} />}
-          <RightSideContainer info={i} />
+          <GenericOutputContainer className="left">
+            <BoldParagraph>{i.name}</BoldParagraph>
+            <ItalicParagraph>{i.degree ?? i.jobTitle}</ItalicParagraph>
+          </GenericOutputContainer>
+          <BulletPoints info={i} />
+          <GenericOutputContainer className="right">
+            <BoldParagraph>
+              {`${i.startDate ?? ""} - ${i.endDate ?? ""}`}
+            </BoldParagraph>
+            <ItalicParagraph>{i.location ?? i.technologies}</ItalicParagraph>
+          </GenericOutputContainer>
         </div>
       ))}
-    </div>
+    </OutputCard>
   );
 }
 
 function Header({ title = "" }) {
-  return title && <h3 className="output-card-title">{title}</h3>;
+  return <h3 className="output-card-title">{title}</h3>;
 }
 
-function LeftSideContainer({ info }) {
+function GenericOutputContainer({ className, children }) {
   return (
-    <div className="left-side-content-container">
-      <BoldParagraph>{info.name}</BoldParagraph>
-      <ItalicParagraph>{info.degree ?? info.jobTitle}</ItalicParagraph>
-    </div>
+    <div className={`${className}-side-content-container`}>{children}</div>
   );
 }
 
-function RightSideContainer({ info }) {
-  const fullDate = `${info.startDate ?? ""} - ${info.endDate ?? ""}`;
+function RowOutputContainer({ info, title }) {
   return (
-    <div className="right-side-content-container">
-      <BoldParagraph>{info.startDate && fullDate}</BoldParagraph>
-      <ItalicParagraph>{info.location ?? info.technologies}</ItalicParagraph>
+    <div className="skills-section">
+      {info && <BoldParagraph>{title}</BoldParagraph>}
+      <p>{info}</p>
     </div>
   );
 }
@@ -54,3 +66,13 @@ function BulletPoints({ info }) {
       )
   );
 }
+
+export {
+  OutputCard,
+  GenericOutputCard,
+  GenericOutputContainer,
+  RowOutputContainer,
+  BoldParagraph,
+  ItalicParagraph,
+  BulletPoints,
+};

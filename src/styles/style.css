@@ -287,6 +287,15 @@ ul.output-bullet-points {
   gap: 0.6em;
 }
 
+.skills-section {
+  display: flex;
+  gap: 5px;
+}
+
+.skills-section:last-child {
+  margin-bottom: 10px;
+}
+
 /* input validation styles */
 
 .input-field:focus {

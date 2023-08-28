@@ -77,6 +77,13 @@ const educationForm = [
   location,
 ];
 
+const technicalSkillsForm = [
+  { title: "Language/Frameworks", placeholder: "", propToUpdate: "languages" },
+  { title: "Testing/Deployment", placeholder: "", propToUpdate: "testing" },
+  { title: "Developer Tools", placeholder: "", propToUpdate: "devTools" },
+  { title: "Certifications", placeholder: "", propToUpdate: "certifications" },
+];
+
 const experienceForm = [
   {
     title: "Company Name",
@@ -116,6 +123,7 @@ const projectForm = [
 const Forms = {
   generalForm,
   educationForm,
+  technicalSkillsForm,
   experienceForm,
   projectForm,
 };

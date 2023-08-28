@@ -1,5 +1,9 @@
 import { useState } from "react";
-import OutputCard from "./outputCard";
+import {
+  OutputCard,
+  GenericOutputCard,
+  RowOutputContainer,
+} from "./outputCard";
 import InputContainer from "./inputContainer";
 import Card from "./card";
 import OutputHeader from "./outputHeader";
@@ -22,6 +26,10 @@ export default function App() {
     loadStorageData("education") ?? []
   );
 
+  const [technicalSkills, setTechnicalSkills] = useState(
+    loadStorageData("technicalSkills") ?? []
+  );
+
   const [experience, setExperience] = useState(
     loadStorageData("experience") ?? []
   );
@@ -30,7 +38,13 @@ export default function App() {
 
   localStorage.setItem(
     "userInfo",
-    JSON.stringify({ information, education, experience, projects })
+    JSON.stringify({
+      information,
+      education,
+      technicalSkills,
+      experience,
+      projects,
+    })
   );
 
   const handleOnShow = (containerIndex) => {
@@ -73,10 +87,24 @@ export default function App() {
           />
         </InputContainer>
         <InputContainer
-          className={"experience-information"}
-          title="Experience"
+          className={"technical-skills"}
+          title="Technical Skills"
           containerIndex={2}
           containerState={activeContainer === 2}
+          onShow={handleOnShow}
+        >
+          <Card
+            buttonTitle="Add Technical Skills"
+            information={technicalSkills}
+            setInformation={setTechnicalSkills}
+            sectionForm="technicalSkillsForm"
+          />
+        </InputContainer>
+        <InputContainer
+          className={"experience-information"}
+          title="Experience"
+          containerIndex={3}
+          containerState={activeContainer === 3}
           onShow={handleOnShow}
         >
           <Card
@@ -89,8 +117,8 @@ export default function App() {
         <InputContainer
           className="project-information"
           title="Projects"
-          containerIndex={3}
-          containerState={activeContainer === 3}
+          containerIndex={4}
+          containerState={activeContainer === 4}
           onShow={handleOnShow}
         >
           <Card
@@ -103,9 +131,35 @@ export default function App() {
       </section>
       <section className="output-section">
         <OutputHeader generalInformation={information} />
-        <OutputCard title="Education" info={education} />
-        <OutputCard title="Experience" info={experience} />
-        <OutputCard title="Projects" info={projects} />
+        <GenericOutputCard title="Education" info={education} />
+        <OutputCard title="Technical Skills" info={technicalSkills}>
+          {technicalSkills.map((item) => (
+            <>
+              <RowOutputContainer
+                info={item.languages}
+                title="Languages/Frameworks"
+                key="languages"
+              />
+              <RowOutputContainer
+                info={item.testing}
+                title="Testing/Development"
+                key="testing"
+              />
+              <RowOutputContainer
+                info={item.devTools}
+                title="Developer Tools"
+                key="devTools"
+              />
+              <RowOutputContainer
+                info={item.certifications}
+                title="Certifications"
+                key="certifications"
+              />
+            </>
+          ))}
+        </OutputCard>
+        <GenericOutputCard title="Experience" info={experience} />
+        <GenericOutputCard title="Projects" info={projects} />
       </section>
     </>
   );

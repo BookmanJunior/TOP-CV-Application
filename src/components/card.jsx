@@ -2,12 +2,14 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import InputCard from "./inputCard";
 import DataCard from "./dataCard";
+import { updateLocalStorageData } from "./localStorage";
 
 export default function Card({
   buttonTitle,
   information,
   setInformation,
   sectionForm,
+  localStorageProperty,
   initialFormState = "closed",
   initialItem = null,
   expandable = true,
@@ -29,6 +31,7 @@ export default function Card({
 
     setItemsId({ editItemId: null, newItemId: null });
     setActiveForm("closed");
+    updateLocalStorageData(localStorageProperty, information);
   };
 
   const handleCancel = () => {
@@ -70,6 +73,7 @@ export default function Card({
   };
 
   const handleDelete = (id) => {
+    updateLocalStorageData(localStorageProperty, information);
     setInformation([...information.filter((key) => key.id !== id)]);
   };
 

@@ -7,13 +7,9 @@ import {
 import InputContainer from "./inputContainer";
 import Card from "./card";
 import OutputHeader from "./outputHeader";
+import { loadStorageData } from "./localStorage";
 
 export default function App() {
-  const loadStorageData = (key) => {
-    const data = JSON.parse(localStorage.getItem("userInfo"));
-    return data?.[key];
-  };
-
   const [information, setInformation] = useState(
     loadStorageData("information") ?? [
       {
@@ -35,17 +31,6 @@ export default function App() {
   );
   const [projects, setProjects] = useState(loadStorageData("projects") ?? []);
   const [activeContainer, setActiveContainer] = useState(0);
-
-  localStorage.setItem(
-    "userInfo",
-    JSON.stringify({
-      information,
-      education,
-      technicalSkills,
-      experience,
-      projects,
-    })
-  );
 
   const handleOnShow = (containerIndex) => {
     setActiveContainer(
@@ -70,6 +55,7 @@ export default function App() {
             initialFormState="opened"
             initialItem={1}
             expandable={false}
+            localStorageProperty="information"
           />
         </InputContainer>
         <InputContainer
@@ -84,6 +70,7 @@ export default function App() {
             information={education}
             setInformation={setEducation}
             sectionForm="educationForm"
+            localStorageProperty="education"
           />
         </InputContainer>
         <InputContainer
@@ -98,6 +85,7 @@ export default function App() {
             information={technicalSkills}
             setInformation={setTechnicalSkills}
             sectionForm="technicalSkillsForm"
+            localStorageProperty="technicalSkills"
           />
         </InputContainer>
         <InputContainer
@@ -112,6 +100,7 @@ export default function App() {
             information={experience}
             setInformation={setExperience}
             sectionForm="experienceForm"
+            localStorageProperty="experience"
           />
         </InputContainer>
         <InputContainer
@@ -126,6 +115,7 @@ export default function App() {
             information={projects}
             setInformation={setProjects}
             sectionForm="projectForm"
+            localStorageProperty="projects"
           />
         </InputContainer>
       </section>

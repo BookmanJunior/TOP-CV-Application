@@ -17,7 +17,7 @@ export default function PdfDownloadButton({
       }
       fileName="cv"
     >
-      {({ loading }) => !loading && <button>Download PDF</button>}
+      {() => <button className="download-btn">Download PDF</button>}
     </PDFDownloadLink>
   );
 }

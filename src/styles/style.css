@@ -4,6 +4,7 @@
   --primary: #2c5c87;
   --secondary: #d8e6f3;
   --accent: #3e84c1;
+  --secondary-bg-color: #ffffff;
   --gray: #808080;
   --white: #ffffff;
   --valid: #6dac50;
@@ -70,10 +71,10 @@ body {
   --input-size: 0.625em;
 
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: auto 1fr 2fr;
   gap: var(--size);
   padding: var(--size);
-  max-width: 1200px;
+  max-width: 1300px;
   margin: auto;
 }
 
@@ -83,11 +84,54 @@ body {
 
 .output-section,
 .form-section,
-.data-section {
+.data-section,
+aside {
   border-radius: 5px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
   padding: var(--size);
-  background-color: var(--white);
+  background-color: var(--secondary-bg-color);
+}
+
+aside {
+  position: sticky;
+  top: 0;
+  align-self: start;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--size);
+}
+
+aside button,
+.form-buttons button,
+.add-button,
+a button,
+.modal-buttons button {
+  padding-block: 10px;
+  padding: 7px 2em;
+  border-radius: 8px;
+  margin-right: 5px;
+  font-size: 1.1rem;
+  transition: 200ms ease-in-out;
+}
+
+aside button,
+li button {
+  background-color: transparent;
+}
+
+aside button {
+  border: 1px solid var(--accent);
+}
+
+.clear-btn:hover {
+  background-color: red;
+}
+
+aside button:hover,
+a button:hover {
+  background-color: var(--accent);
+  color: var(--white) !important;
 }
 
 .form-section:is(:not(:last-child)),
@@ -152,12 +196,6 @@ textarea + span {
   margin-bottom: var(--size);
 }
 
-li > button {
-  cursor: pointer;
-  padding-block: 10px;
-  background-color: transparent;
-}
-
 li > button:first-child {
   text-align: left;
 }
@@ -173,14 +211,6 @@ li > button:nth-child(2) {
 
 .bullet-points button {
   margin-top: 5px;
-}
-
-.form-buttons > button,
-.add-button {
-  padding: 7px 2em;
-  border-radius: 8px;
-  margin-right: 5px;
-  font-size: 1.1rem;
 }
 
 form {
@@ -349,6 +379,37 @@ ul.output-bullet-points {
   border-color: var(--accent);
   outline-color: var(--accent);
   color: var(--accent);
+}
+
+/* modal styles */
+.modal-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99;
+  inset: 0;
+}
+
+.modal-closed {
+  display: none;
+}
+
+.modal-active {
+  display: grid;
+  place-items: center;
+  position: fixed;
+}
+
+.modal-content {
+  display: grid;
+  gap: 10px;
+  padding: 2em;
+  background-color: var(--background);
+  border-radius: 8px;
+}
+
+.modal-buttons {
+  text-align: center;
 }
 
 /* utility classes */

@@ -19,7 +19,7 @@ function GenericOutputCard({ title, info }) {
           <BulletPoints info={i} />
           <GenericOutputContainer className="right">
             <BoldParagraph>
-              {`${i.startDate ?? ""} - ${i.endDate ?? ""}`}
+              {i.startDate && `${i.startDate ?? ""} - ${i.endDate ?? ""}`}
             </BoldParagraph>
             <ItalicParagraph>{i.location ?? i.technologies}</ItalicParagraph>
           </GenericOutputContainer>

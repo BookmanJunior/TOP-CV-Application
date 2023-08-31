@@ -8,6 +8,8 @@ import InputContainer from "./inputContainer";
 import Card from "./card";
 import OutputHeader from "./outputHeader";
 import { loadStorageData } from "./localStorage";
+import PdfDownloadButton from "./pdf/pdfDownloadButton";
+import Modal from "./modal";
 
 export default function App() {
   const [information, setInformation] = useState(
@@ -38,8 +40,37 @@ export default function App() {
     );
   };
 
+  const [isModalActive, setIsModalActive] = useState(false);
+
+  const clearData = () => {
+    setInformation([
+      {
+        id: 1,
+      },
+    ]);
+    setEducation([]);
+    setTechnicalSkills([]);
+    setExperience([]);
+    setProjects([]);
+    localStorage.clear();
+    setIsModalActive(!isModalActive);
+  };
+
   return (
     <>
+      <aside className="misc-buttons">
+        <PdfDownloadButton
+          generalInformation={information}
+          education={education}
+          experience={experience}
+        />
+        <button
+          className="clear-btn"
+          onClick={() => setIsModalActive(!isModalActive)}
+        >
+          Clear
+        </button>
+      </aside>
       <section className="input-section">
         <InputContainer
           className={"general-information"}
@@ -151,6 +182,13 @@ export default function App() {
         <GenericOutputCard title="Experience" info={experience} />
         <GenericOutputCard title="Projects" info={projects} />
       </section>
+      <Modal
+        isActive={isModalActive}
+        setIsActive={setIsModalActive}
+        cb={clearData}
+      >
+        <p>Are you sure you want to erase all data?</p>
+      </Modal>
     </>
   );
 }

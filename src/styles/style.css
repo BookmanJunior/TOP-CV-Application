@@ -3,12 +3,27 @@
   --background: #f7fafd;
   --primary: #2c5c87;
   --secondary: #d8e6f3;
-  --accent: #3e84c1;
   --secondary-bg-color: #ffffff;
+  --accent: #3e84c1;
   --gray: #808080;
   --white: #ffffff;
   --valid: #6dac50;
   --invalid: #ca4c4c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #cdcac6;
+    --background: #181a1b;
+    --primary: #2c5c87;
+    --secondary: #546473;
+    --secondary-bg-color: #2c2f31;
+    --accent: #3e84c1;
+    --gray: #808080;
+    --white: #ffffff;
+    --valid: #6dac50;
+    --invalid: #ca4c4c;
+  }
 }
 
 /* css reset */
@@ -76,6 +91,7 @@ body {
   padding: var(--size);
   max-width: 1300px;
   margin: auto;
+  color: var(--text);
 }
 
 .output-section {
@@ -143,6 +159,7 @@ button {
   cursor: pointer;
   appearance: none;
   border: none;
+  color: var(--text);
 }
 
 /* input section styles */
@@ -154,6 +171,11 @@ button {
 .input-field {
   padding: var(--input-size);
   border: 1px solid var(--gray);
+  background-color: var(--secondary-bg-color);
+}
+
+#deleteIcon {
+  fill: var(--text);
 }
 
 .input-container {
@@ -255,8 +277,8 @@ form {
   content: "";
   width: 10px;
   aspect-ratio: 1 / 1;
-  border-right: 0.2em solid black;
-  border-top: 0.2em solid black;
+  border-right: 0.2em solid var(--text);
+  border-top: 0.2em solid var(--text);
   transform: rotate(135deg);
   transition: transform 200ms ease-in-out;
 }
@@ -277,8 +299,8 @@ form {
 /* output styles */
 
 .output-card-title,
-.general-info {
-  border-bottom: 1px solid #000000;
+.output-header {
+  border-bottom: 1px solid var(--text);
 }
 
 .header-general-content,
@@ -287,7 +309,8 @@ form {
   gap: 10px;
 }
 
-.output-card-title {
+.output-card-title,
+.output-header {
   margin-bottom: 5px;
 }
 
@@ -339,7 +362,7 @@ ul.output-bullet-points {
 
 .input-field:focus + span,
 .input-field:not(:placeholder-shown) + span {
-  background-color: var(--white);
+  background-color: var(--secondary-bg-color);
 }
 
 .input-field:not(:placeholder-shown) + span,

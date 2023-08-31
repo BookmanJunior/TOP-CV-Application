@@ -92,7 +92,11 @@ export default function InputField({
             />
           ))
       )}
-      <button type="button" onClick={handleBulletPointAdd}>
+      <button
+        className="accent-color"
+        type="button"
+        onClick={handleBulletPointAdd}
+      >
         Add More
       </button>
     </div>
@@ -124,7 +128,11 @@ function BulletPointInput({ item, title, onChange, onDelete }) {
       />
       <span>{title}</span>
 
-      <button type="button" onClick={() => onDelete(item.id)}>
+      <button
+        className="accent-color"
+        type="button"
+        onClick={() => onDelete(item.id)}
+      >
         Delete
       </button>
     </div>

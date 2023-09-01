@@ -1,7 +1,7 @@
 import InputField from "./inputField";
 import Forms from "./forms";
 
-export default function InputCard({
+export default function InputForm({
   onSubmit,
   onCancel,
   sectionForm,

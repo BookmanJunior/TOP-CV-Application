@@ -4,7 +4,7 @@ import {
   GenericOutputCard,
   RowOutputContainer,
 } from "./outputCard";
-import InputCard from "./card";
+import InputCard from "./inputCard";
 import OutputHeader from "./outputHeader";
 import { loadStorageData } from "./localStorage";
 import PdfDownloadButton from "./pdf/pdfDownloadButton";

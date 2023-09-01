@@ -27,6 +27,9 @@ export default function InputCard({
   });
   const [form, setActiveForm] = useState(initialFormState);
   const [copyOfExistingData, setCopy] = useState(copyOfInitialItem);
+  const [localData, setLocalData] = useState(
+    JSON.parse(localStorage.getItem("userInfo"))
+  );
 
   const isAddButtonActive = form === "closed";
 
@@ -35,7 +38,7 @@ export default function InputCard({
 
     setItemsId({ editItemId: null, newItemId: null });
     setActiveForm("closed");
-    updateLocalStorageData(localStorageProperty, information);
+    setLocalData({ ...localData, [localStorageProperty]: information });
   };
 
   const handleCancel = () => {
@@ -78,8 +81,12 @@ export default function InputCard({
 
   const handleDelete = (id) => {
     setInformation([...information.filter((key) => key.id !== id)]);
-    updateLocalStorageData(localStorageProperty, information);
+    setLocalData({ ...localData, [localStorageProperty]: information });
   };
+
+  useEffect(() => {
+    updateLocalStorageData(localStorageProperty, information);
+  }, [localData]);
 
   useEffect(() => {
     if (initialFormState === "closed") {

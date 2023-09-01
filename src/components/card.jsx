@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import InputCard from "./inputCard";
+import InputForm from "./inputCard";
 import DataCard from "./dataCard";
 import { updateLocalStorageData } from "./localStorage";
 
-export default function Card({
+export default function InputCard({
   buttonTitle,
   information,
   setInformation,
@@ -13,6 +13,10 @@ export default function Card({
   initialFormState = "closed",
   initialItem = null,
   expandable = true,
+  title,
+  containerState,
+  containerIndex,
+  onShow,
 }) {
   const copyOfInitialItem =
     initialItem && information.filter((item) => item.id === initialItem)[0];
@@ -73,31 +77,89 @@ export default function Card({
   };
 
   const handleDelete = (id) => {
-    updateLocalStorageData(localStorageProperty, information);
     setInformation([...information.filter((key) => key.id !== id)]);
+    updateLocalStorageData(localStorageProperty, information);
   };
 
+  useEffect(() => {
+    if (initialFormState === "closed") {
+      handleCancel();
+    }
+  }, [containerState]);
+
   return (
-    <>
-      {isAddButtonActive ? (
-        <DataCard
-          info={information}
-          onAdd={handleAdd}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-          expandable={expandable}
-          buttonTitle={buttonTitle}
-        />
-      ) : (
-        <InputCard
-          information={information}
-          setInformation={setInformation}
-          onSubmit={handleSave}
-          onCancel={handleCancel}
-          sectionForm={sectionForm}
-          itemsId={itemsId}
-        />
+    <Container
+      title={title}
+      onShow={() => {
+        onShow(containerIndex);
+      }}
+      containerState={containerState}
+      containerIndex={containerIndex}
+    >
+      {containerIndex === containerState && (
+        <div className="container-content">
+          {isAddButtonActive ? (
+            <DataCard
+              info={information}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+          ) : (
+            <InputForm
+              information={information}
+              setInformation={setInformation}
+              onSubmit={handleSave}
+              onCancel={handleCancel}
+              sectionForm={sectionForm}
+              itemsId={itemsId}
+            />
+          )}
+        </div>
       )}
-    </>
+      {containerIndex === containerState && (
+        <div className="container-footer">
+          {!expandable && information.length <= 0 && isAddButtonActive && (
+            <AddNewButton onAdd={handleAdd} title={buttonTitle} />
+          )}
+          {expandable && isAddButtonActive && (
+            <AddNewButton onAdd={handleAdd} title={buttonTitle} />
+          )}
+        </div>
+      )}
+    </Container>
+  );
+}
+
+function Container({
+  children,
+  containerState,
+  containerIndex,
+  title,
+  onShow,
+}) {
+  return (
+    <div
+      className="form-section"
+      aria-expanded={containerState === containerIndex}
+    >
+      <div className="container-header">
+        <h2 className="container-title">{title}</h2>
+        <button type="button" onClick={onShow}></button>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function AddNewButton({ onAdd, title }) {
+  return (
+    <button
+      className="add-button primary-color"
+      key={title}
+      type="button"
+      onClick={onAdd}
+    >
+      {title}
+    </button>
   );
 }

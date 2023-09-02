@@ -79,10 +79,11 @@ export default function App() {
         >
           Clear
         </button>
+        <button className="hover-accent preview-btn">Preview</button>
       </aside>
       <section className="input-section">
         <InputCard
-          title="General Information"
+          title="General"
           containerIndex={0}
           containerState={activeContainer}
           onShow={handleOnShow}

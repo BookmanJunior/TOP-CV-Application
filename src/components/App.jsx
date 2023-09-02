@@ -24,29 +24,26 @@ export default function App() {
   };
 
   const [information, setInformation] = useState(initialGeneralInformationLoad);
-
   const [education, setEducation] = useState(
     loadStorageData("education") ?? []
   );
-
   const [technicalSkills, setTechnicalSkills] = useState(
     loadStorageData("technicalSkills") ?? []
   );
-
   const [experience, setExperience] = useState(
     loadStorageData("experience") ?? []
   );
   const [projects, setProjects] = useState(loadStorageData("projects") ?? []);
   const [activeContainer, setActiveContainer] = useState(0);
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [isClearRequest, setIsClearRequest] = useState(false);
+  const [isPreviewActive, setIsPreviewActive] = useState(false);
 
   const handleOnShow = (containerIndex) => {
     setActiveContainer(
       activeContainer === containerIndex ? null : containerIndex
     );
   };
-
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [isClearRequest, setIsClearRequest] = useState(false);
 
   const clearData = () => {
     setInformation([
@@ -79,7 +76,12 @@ export default function App() {
         >
           Clear
         </button>
-        <button className="hover-accent preview-btn">Preview</button>
+        <button
+          className="hover-accent preview-btn"
+          onClick={() => setIsPreviewActive(!isPreviewActive)}
+        >
+          Preview
+        </button>
       </aside>
       <section className="input-section">
         <InputCard
@@ -152,7 +154,9 @@ export default function App() {
           setClearRequest={setIsClearRequest}
         />
       </section>
-      <section className="output-section">
+      <section
+        className={`output-section ${isPreviewActive && "preview-active"}`}
+      >
         <OutputHeader generalInformation={information} />
         <GenericOutputCard title="Education" info={education} />
         <OutputCard title="Technical Skills" info={technicalSkills}>
@@ -184,6 +188,14 @@ export default function App() {
         <GenericOutputCard title="Experience" info={experience} />
         <GenericOutputCard title="Projects" info={projects} />
       </section>
+      {isPreviewActive && (
+        <button
+          className="exit-preview-btn hover-accent"
+          onClick={() => setIsPreviewActive(!isPreviewActive)}
+        >
+          X
+        </button>
+      )}
       <Modal
         isActive={isModalActive}
         setIsActive={setIsModalActive}

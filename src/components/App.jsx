@@ -11,9 +11,19 @@ import PdfDownloadButton from "./pdf/pdfDownloadButton";
 import Modal from "./modal";
 
 export default function App() {
-  const [information, setInformation] = useState(
-    loadStorageData("information") ?? [{ id: 1 }]
-  );
+  const initialGeneralInformationLoad = () => {
+    if (!loadStorageData("information")) {
+      return [{ id: 1 }];
+    }
+
+    if (!loadStorageData("information").length) {
+      return [{ id: 1 }];
+    }
+
+    return loadStorageData("information");
+  };
+
+  const [information, setInformation] = useState(initialGeneralInformationLoad);
 
   const [education, setEducation] = useState(
     loadStorageData("education") ?? []
@@ -80,7 +90,6 @@ export default function App() {
           setInformation={setInformation}
           sectionForm="generalForm"
           initialFormState="opened"
-          // check if info exists, load it
           initialItem={information.length && information[0].id}
           expandable={false}
           localStorageProperty="information"

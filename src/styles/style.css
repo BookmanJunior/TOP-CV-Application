@@ -394,6 +394,28 @@ a > button {
     display: none;
   }
 
+  .output-section.preview-active {
+    display: block;
+    position: fixed;
+    top: 5%;
+    justify-self: center;
+    z-index: 999;
+  }
+
+  .exit-preview-btn {
+    position: fixed;
+    z-index: 999;
+    top: 5px;
+    place-self: end;
+    width: 32px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+
+  .output-section.preview-active + aside {
+    visibility: hidden;
+  }
+
   aside .preview-btn {
     display: block;
   }

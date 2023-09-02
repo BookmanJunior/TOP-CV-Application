@@ -237,8 +237,8 @@ form {
 }
 
 :is(.data-section, .form-section)[aria-expanded="true"] {
-  transition: max-height 500ms ease-in-out;
-  max-height: 500vh;
+  transition: max-height 500ms ease-in;
+  max-height: 100%;
 }
 
 :is(.data-section, .form-section)[aria-expanded="false"] {

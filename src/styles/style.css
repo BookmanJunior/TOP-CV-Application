@@ -116,6 +116,11 @@ aside {
   display: flex;
   flex-direction: column;
   gap: var(--size);
+  z-index: 100;
+}
+
+aside .preview-btn {
+  display: none;
 }
 
 aside button,
@@ -123,10 +128,8 @@ aside button,
 .add-button,
 a button,
 .modal-buttons button {
-  padding-block: 10px;
   padding: 7px 2em;
   border-radius: 8px;
-  margin-right: 5px;
   font-size: 1.1rem;
   transition: 200ms ease-in-out;
 }
@@ -184,6 +187,11 @@ button {
     scale 50ms ease-in;
 }
 
+.form-buttons {
+  display: flex;
+  gap: 5px;
+}
+
 .bullet-point {
   position: relative;
 }
@@ -200,6 +208,7 @@ textarea + span {
 .container-content ul > li {
   display: flex;
   justify-content: space-between;
+  align-items: start;
   margin-bottom: var(--size);
 }
 
@@ -238,7 +247,7 @@ form {
 
 :is(.data-section, .form-section)[aria-expanded="true"] {
   transition: max-height 500ms ease-in;
-  max-height: 100%;
+  max-height: 100vh;
 }
 
 :is(.data-section, .form-section)[aria-expanded="false"] {
@@ -337,6 +346,57 @@ ul.output-bullet-points {
 
 .skills-section:last-child {
   margin-bottom: 10px;
+}
+
+@media screen and (width <= 1000px) {
+  #root {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  aside,
+  .input-section {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .input-section {
+    margin-top: 150px;
+  }
+
+  .output-section {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+a > button {
+  width: 100%;
+}
+
+@media screen and (width <= 785px) {
+  #root {
+    grid-template-columns: 1fr;
+    max-height: 700px;
+    place-items: center;
+  }
+
+  .input-section {
+    margin-top: 0;
+    grid-row: 2;
+  }
+
+  .input-section,
+  aside {
+    width: min(500px, 100%);
+  }
+
+  .output-section {
+    display: none;
+  }
+
+  aside .preview-btn {
+    display: block;
+  }
 }
 
 /* input validation styles */

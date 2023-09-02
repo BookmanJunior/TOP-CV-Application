@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
   },
   generalInfoContent: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     fontSize: 14,
-    gap: 16,
     borderBottom: "1px solid #000000",
     paddingBottom: 4,
   },
@@ -19,6 +18,11 @@ const styles = StyleSheet.create({
   },
   outputCardTitle: {
     paddingBlock: 10,
+  },
+  flexRow: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
   },
 });
 
@@ -33,9 +37,11 @@ export default function GeneralInformationView({ generalInformation }) {
 
 function GeneralInformationHeader({ generalInformation }) {
   return (
-    <View style={styles.fullName}>
+    <View style={styles.fullName} key="general-info">
       {generalInformation.map((item) => (
-        <Text key={item.firstName}>{`${item.firstName} ${item.lastName}`}</Text>
+        <Text key={item.firstName}>{`${item.firstName ?? ""} ${
+          item.lastName ?? ""
+        }`}</Text>
       ))}
     </View>
   );
@@ -43,13 +49,19 @@ function GeneralInformationHeader({ generalInformation }) {
 
 function GeneralInformationContent({ generalInformation }) {
   return (
-    <View>
+    <View style={styles.generalInfoContent}>
       {generalInformation.map((item) => (
-        <View key={item.id} style={styles.generalInfoContent}>
-          <Text>{item.email}</Text>
-          <Text>{item.phoneNumber}</Text>
-          <Text>{item.location}</Text>
-        </View>
+        <>
+          <View key={item.id} style={styles.flexRow}>
+            <Text>{item.email}</Text>
+            <Text>{item.phoneNumber}</Text>
+            <Text>{item.location}</Text>
+          </View>
+          <View key={"links"} style={styles.flexRow}>
+            {item.linkedin && <Text>{item.linkedin}</Text>}
+            <Text>{item.github}</Text>
+          </View>
+        </>
       ))}
     </View>
   );

@@ -4,7 +4,9 @@ import PdfOutput from "./pdfOutput";
 export default function PdfDownloadButton({
   generalInformation,
   education,
+  technicalSkills,
   experience,
+  project,
 }) {
   return (
     <PDFDownloadLink
@@ -12,7 +14,9 @@ export default function PdfDownloadButton({
         <PdfOutput
           generalInformation={generalInformation}
           education={education}
+          technicalSkills={technicalSkills}
           experience={experience}
+          project={project}
         />
       }
       fileName="cv"

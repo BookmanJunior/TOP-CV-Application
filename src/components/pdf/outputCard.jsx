@@ -5,11 +5,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   header: {
+    fontSize: 14,
     fontWeight: 700,
     borderBottom: "1px solid #000000",
-    paddingBottom: 4,
-    marginTop: 8,
-    marginBottom: 8,
+    paddingBottom: 2,
+    marginTop: 5,
+    marginBottom: 5,
   },
   container: {
     display: "flex",
@@ -25,12 +26,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 8,
   },
+  rowContainer: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 5,
+  },
 });
 
-export default function InfoSection({ info, title }) {
+function OutputCard({ title, info, children }) {
   return (
     <View style={styles.body}>
       {info.length > 0 && <Header title={title} />}
+      {children}
+    </View>
+  );
+}
+function InfoSection({ info, title }) {
+  return (
+    <OutputCard style={styles.body} info={info} title={title}>
       {info.map((i) => (
         <View key={i.id} style={styles.container}>
           <LeftSideContainer info={i}>
@@ -39,9 +52,20 @@ export default function InfoSection({ info, title }) {
           <RightSideContainer info={i} />
         </View>
       ))}
+    </OutputCard>
+  );
+}
+
+function RowOutputContainer({ info, title }) {
+  return (
+    <View style={styles.rowContainer}>
+      {info && <BoldParagraph>{title}</BoldParagraph>}
+      <Text>{info}</Text>
     </View>
   );
 }
+
+export { OutputCard, InfoSection, RowOutputContainer };
 
 function Header({ title = "" }) {
   return (
@@ -56,10 +80,8 @@ function Header({ title = "" }) {
 function LeftSideContainer({ info, children }) {
   return (
     <View style={styles.contentContainer}>
-      <Text style={{ fontWeight: 700 }}>{info.name}</Text>
-      <Text style={{ fontStyle: "italic" }}>
-        {info.degree ?? info.jobTitle}
-      </Text>
+      <BoldParagraph>{info.name}</BoldParagraph>
+      <ItalicParagraph>{info.degree ?? info.jobTitle}</ItalicParagraph>
       {children}
     </View>
   );
@@ -69,10 +91,18 @@ function RightSideContainer({ info }) {
   const fullDate = `${info.startDate ?? ""} - ${info.endDate ?? ""}`;
   return (
     <View style={{ ...styles.contentContainer, alignItems: "flex-end" }}>
-      <Text style={{ fontWeight: 700 }}>{fullDate}</Text>
-      <Text style={{ fontStyle: "italic" }}>{info.location}</Text>
+      <BoldParagraph>{fullDate}</BoldParagraph>
+      <ItalicParagraph>{info.location ?? info.technologies}</ItalicParagraph>
     </View>
   );
+}
+
+function BoldParagraph({ children }) {
+  return <Text style={{ fontWeight: 700 }}>{children}</Text>;
+}
+
+function ItalicParagraph({ children }) {
+  return <Text style={{ fontStyle: "italic" }}>{children}</Text>;
 }
 
 function BulletPoints({ info }) {

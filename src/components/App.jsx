@@ -12,8 +12,7 @@ import Modal from "./modal";
 
 export default function App() {
   const [information, setInformation] = useState(
-    (!loadStorageData("information").length && [{ id: 1 }]) ||
-      (loadStorageData("information") ?? [{ id: 1 }])
+    loadStorageData("information") ?? [{ id: 1 }]
   );
 
   const [education, setEducation] = useState(

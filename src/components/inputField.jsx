@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function InputField({
@@ -11,6 +12,8 @@ export default function InputField({
   propToUpdate,
   required,
 }) {
+  const [currValue, setCurrValue] = useState(value ?? "");
+
   const name =
     title.split(" ").length >= 2
       ? title.split(" ")[0].toLowerCase() + title.split(" ")[1]
@@ -20,6 +23,7 @@ export default function InputField({
   const parentObject = infoState.filter((item) => item.id === itemId)[0];
 
   const handleChange = (e, updateProp) => {
+    setCurrValue(e.target.value);
     setInfoState(
       infoState.map((item) => {
         if (item.id === itemId) {
@@ -105,7 +109,7 @@ export default function InputField({
       <input
         type={type}
         name={name}
-        value={value}
+        value={currValue}
         placeholder={placeholder}
         onInput={(e) => handleChange(e, propToUpdate)}
         className="input-field"

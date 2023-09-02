@@ -59,7 +59,9 @@ export default function App() {
         <PdfDownloadButton
           generalInformation={information}
           education={education}
+          technicalSkills={technicalSkills}
           experience={experience}
+          project={projects}
         />
         <button
           className="hover-warning"

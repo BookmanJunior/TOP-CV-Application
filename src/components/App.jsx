@@ -36,6 +36,7 @@ export default function App() {
   };
 
   const [isModalActive, setIsModalActive] = useState(false);
+  const [isClearRequest, setIsClearRequest] = useState(false);
 
   const clearData = () => {
     setInformation([
@@ -49,6 +50,7 @@ export default function App() {
     setProjects([]);
     localStorage.clear();
     setIsModalActive(!isModalActive);
+    setIsClearRequest(true);
   };
 
   return (
@@ -81,6 +83,8 @@ export default function App() {
           expandable={false}
           localStorageProperty="information"
           buttonTitle="Add general information"
+          clearRequest={isClearRequest}
+          setClearRequest={setIsClearRequest}
         />
         <InputCard
           title="Education"
@@ -92,6 +96,8 @@ export default function App() {
           setInformation={setEducation}
           sectionForm="educationForm"
           localStorageProperty="education"
+          clearRequest={isClearRequest}
+          setClearRequest={setIsClearRequest}
         />
         <InputCard
           title="Technical Skills"
@@ -104,6 +110,8 @@ export default function App() {
           sectionForm="technicalSkillsForm"
           localStorageProperty="technicalSkills"
           expandable={false}
+          clearRequest={isClearRequest}
+          setClearRequest={setIsClearRequest}
         />
         <InputCard
           title="Experience"
@@ -115,6 +123,8 @@ export default function App() {
           setInformation={setExperience}
           sectionForm="experienceForm"
           localStorageProperty="experience"
+          clearRequest={isClearRequest}
+          setClearRequest={setIsClearRequest}
         />
         <InputCard
           title="Projects"
@@ -126,6 +136,8 @@ export default function App() {
           setInformation={setProjects}
           sectionForm="projectForm"
           localStorageProperty="projects"
+          clearRequest={isClearRequest}
+          setClearRequest={setIsClearRequest}
         />
       </section>
       <section className="output-section">

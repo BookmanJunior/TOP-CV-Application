@@ -17,8 +17,10 @@ export default function InputCard({
   containerState,
   containerIndex,
   onShow,
+  clearRequest,
+  setClearRequest,
 }) {
-  const copyOfInitialItem =
+  const copyOfInitialItem = () =>
     initialItem && information.filter((item) => item.id === initialItem)[0];
 
   const [itemsId, setItemsId] = useState({
@@ -94,6 +96,14 @@ export default function InputCard({
     }
   }, [containerState]);
 
+  useEffect(() => {
+    if (clearRequest) handleCancel();
+
+    return () => {
+      setClearRequest(false);
+    };
+  }, [clearRequest]);
+
   return (
     <ParentContainer
       title={title}
@@ -115,6 +125,7 @@ export default function InputCard({
               information={information}
               setInformation={setInformation}
               itemsId={itemsId}
+              clearRequest={clearRequest}
             />
             <FormButtons onCancel={handleCancel} />
           </form>

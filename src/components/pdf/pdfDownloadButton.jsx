@@ -17,7 +17,7 @@ export default function PdfDownloadButton({
       }
       fileName="cv"
     >
-      {() => <button className="download-btn">Download PDF</button>}
+      {() => <button className="hover-accent">Download PDF</button>}
     </PDFDownloadLink>
   );
 }

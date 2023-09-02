@@ -1,4 +1,4 @@
-export default function Modal({ isActive, setIsActive, cb, children }) {
+export default function Modal({ isActive, setIsActive, cb }) {
   return (
     <div
       className={`modal-container ${
@@ -6,10 +6,17 @@ export default function Modal({ isActive, setIsActive, cb, children }) {
       }`}
     >
       <div className="modal-content">
-        {children}
+        <p className="text-bold">Are you sure you want to erase all data?</p>
         <div className="modal-buttons">
-          <button onClick={cb}>Yes</button>
-          <button onClick={() => setIsActive(!isActive)}>No</button>
+          <button className="hover-warning" onClick={cb}>
+            Yes
+          </button>
+          <button
+            className="hover-accent"
+            onClick={() => setIsActive(!isActive)}
+          >
+            No
+          </button>
         </div>
       </div>
     </div>

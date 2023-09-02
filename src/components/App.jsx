@@ -62,7 +62,7 @@ export default function App() {
           experience={experience}
         />
         <button
-          className="clear-btn"
+          className="hover-warning"
           onClick={() => setIsModalActive(!isModalActive)}
         >
           Clear
@@ -176,9 +176,7 @@ export default function App() {
         isActive={isModalActive}
         setIsActive={setIsModalActive}
         cb={clearData}
-      >
-        <p>Are you sure you want to erase all data?</p>
-      </Modal>
+      />
     </>
   );
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import InputForm from "./inputForm";
 import DataCard from "./dataCard";
 import { updateLocalStorageData } from "./localStorage";
+import { InputForm, FormButtons } from "./inputForm";
 
 export default function InputCard({
   buttonTitle,
@@ -95,49 +95,44 @@ export default function InputCard({
   }, [containerState]);
 
   return (
-    <Container
+    <ParentContainer
       title={title}
-      onShow={() => {
-        onShow(containerIndex);
-      }}
+      onShow={onShow}
       containerState={containerState}
       containerIndex={containerIndex}
     >
-      {containerIndex === containerState && (
-        <div className="container-content">
-          {isAddButtonActive ? (
-            <DataCard
-              info={information}
-              onDelete={handleDelete}
-              onEdit={handleEdit}
-            />
-          ) : (
+      <div className="container-content">
+        {isAddButtonActive ? (
+          <DataCard
+            info={information}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
+        ) : (
+          <form onSubmit={handleSave}>
             <InputForm
+              sectionForm={sectionForm}
               information={information}
               setInformation={setInformation}
-              onSubmit={handleSave}
-              onCancel={handleCancel}
-              sectionForm={sectionForm}
               itemsId={itemsId}
             />
-          )}
-        </div>
-      )}
-      {containerIndex === containerState && (
-        <div className="container-footer">
-          {!expandable && information.length <= 0 && isAddButtonActive && (
-            <AddNewButton onAdd={handleAdd} title={buttonTitle} />
-          )}
-          {expandable && isAddButtonActive && (
-            <AddNewButton onAdd={handleAdd} title={buttonTitle} />
-          )}
-        </div>
-      )}
-    </Container>
+            <FormButtons onCancel={handleCancel} />
+          </form>
+        )}
+      </div>
+      <div className="container-footer">
+        {!expandable && information.length <= 0 && isAddButtonActive && (
+          <AddNewButton onAdd={handleAdd} title={buttonTitle} />
+        )}
+        {expandable && isAddButtonActive && (
+          <AddNewButton onAdd={handleAdd} title={buttonTitle} />
+        )}
+      </div>
+    </ParentContainer>
   );
 }
 
-function Container({
+function ParentContainer({
   children,
   containerState,
   containerIndex,
@@ -151,7 +146,7 @@ function Container({
     >
       <div className="container-header">
         <h2 className="container-title">{title}</h2>
-        <button type="button" onClick={onShow}></button>
+        <button type="button" onClick={() => onShow(containerIndex)}></button>
       </div>
       {children}
     </div>

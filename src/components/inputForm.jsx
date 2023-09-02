@@ -1,20 +1,13 @@
 import InputField from "./inputField";
 import Forms from "./forms";
 
-export default function InputForm({
-  onSubmit,
-  onCancel,
-  sectionForm,
-  information,
-  setInformation,
-  itemsId,
-}) {
+function InputForm({ sectionForm, information, setInformation, itemsId }) {
   const editItem = information.filter(
     (item) => itemsId.editItemId === item.id
   )[0];
 
   return (
-    <form onSubmit={onSubmit}>
+    <>
       {Forms[sectionForm].map((input) => (
         <InputField
           key={input.title}
@@ -31,16 +24,23 @@ export default function InputForm({
           required={input?.required ?? false}
         />
       ))}
-      <div className="form-buttons">
-        <button className="save-button primary-color">Save</button>
-        <button
-          className="cancel-button accent-color"
-          type="button"
-          onClick={onCancel}
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+    </>
   );
 }
+
+function FormButtons({ onCancel }) {
+  return (
+    <div className="form-buttons">
+      <button className="save-button primary-color">Save</button>
+      <button
+        className="cancel-button accent-color"
+        type="button"
+        onClick={onCancel}
+      >
+        Cancel
+      </button>
+    </div>
+  );
+}
+
+export { InputForm, FormButtons };

@@ -131,23 +131,8 @@ a button,
   transition: 200ms ease-in-out;
 }
 
-aside button,
 li button {
   background-color: transparent;
-}
-
-aside button {
-  border: 1px solid var(--accent);
-}
-
-.clear-btn:hover {
-  background-color: red;
-}
-
-aside button:hover,
-a button:hover {
-  background-color: var(--accent);
-  color: var(--white) !important;
 }
 
 .form-section:is(:not(:last-child)),
@@ -253,7 +238,7 @@ form {
 
 :is(.data-section, .form-section)[aria-expanded="true"] {
   transition: max-height 500ms ease-in-out;
-  max-height: 100vh;
+  max-height: 500vh;
 }
 
 :is(.data-section, .form-section)[aria-expanded="false"] {
@@ -436,6 +421,10 @@ ul.output-bullet-points {
   border-radius: 8px;
 }
 
+.modal-content > p {
+  font-size: 1.2rem;
+}
+
 .modal-buttons {
   text-align: center;
 }
@@ -458,4 +447,29 @@ ul.output-bullet-points {
 
 .text-italic {
   font-style: italic;
+}
+
+.hover-warning,
+.hover-accent {
+  background-color: transparent;
+}
+
+.hover-warning:hover,
+.hover-accent:hover {
+  color: var(--white) !important;
+}
+
+.hover-warning,
+.hover-accent {
+  border: 1px solid var(--accent);
+}
+
+.hover-warning:hover {
+  background-color: red;
+  border-color: red;
+}
+
+a button:hover,
+.hover-accent:hover {
+  background-color: var(--accent);
 }

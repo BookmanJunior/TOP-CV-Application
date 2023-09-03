@@ -190,7 +190,9 @@ export default function App() {
       </section>
       {isPreviewActive && (
         <button
-          className="exit-preview-btn hover-accent"
+          className={`exit-preview-btn hover-accent ${
+            isPreviewActive && "preview-active"
+          }`}
           onClick={() => setIsPreviewActive(!isPreviewActive)}
         >
           X

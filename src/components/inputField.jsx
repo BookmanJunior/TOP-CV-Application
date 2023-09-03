@@ -126,7 +126,7 @@ function BulletPointInput({ item, title, onChange, onDelete }) {
       <textarea
         value={item.point}
         name={item.id}
-        placeholder="Enter details"
+        placeholder=""
         onInput={(e) => onChange(e, item.id)}
         className="input-field"
       />

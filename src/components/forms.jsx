@@ -1,13 +1,13 @@
 const dates = [
   {
     title: "Start Date",
-    placeholder: "Enter start date",
+    placeholder: " ",
     propToUpdate: "startDate",
     required: true,
   },
   {
     title: "End Date",
-    placeholder: "Enter start data",
+    placeholder: " ",
     propToUpdate: "endDate",
     required: true,
   },
@@ -15,60 +15,60 @@ const dates = [
 
 const location = {
   title: "Location",
-  placeholder: "Enter Location",
+  placeholder: " ",
   propToUpdate: "location",
 };
 
 const bulletPoints = {
   title: "Details",
-  placeholder: "Enter bullet point",
+  placeholder: " ",
   propToUpdate: "details",
 };
 
 const generalForm = [
   {
     title: "First Name",
-    placeholder: "Enter First Name",
+    placeholder: " ",
     propToUpdate: "firstName",
     required: true,
   },
   {
     title: "Last Name",
-    placeholder: "Enter Last Name",
+    placeholder: " ",
     propToUpdate: "lastName",
     required: true,
   },
   {
     title: "Email",
-    placeholder: "Enter Email",
+    placeholder: " ",
     propToUpdate: "email",
     type: "email",
     required: true,
   },
   {
     title: "Phone Number",
-    placeholder: "Enter Phone Number",
+    placeholder: " ",
     propToUpdate: "phoneNumber",
     type: "tel",
     required: true,
   },
   {
     title: "Location",
-    placeholder: "Enter Your Location",
+    placeholder: " ",
     propToUpdate: "location",
     required: true,
   },
   {
     title: "Linkedin",
     propToUpdate: "linkedin",
-    placeholder: "",
+    placeholder: " ",
     type: "url",
     required: false,
   },
   {
     title: "Github",
     propToUpdate: "github",
-    placeholder: "",
+    placeholder: " ",
     type: "url",
     required: false,
   },
@@ -77,13 +77,13 @@ const generalForm = [
 const educationForm = [
   {
     title: "School Name",
-    placeholder: "Enter school name",
+    placeholder: " ",
     propToUpdate: "name",
     required: true,
   },
   {
     title: "Degree",
-    placeholder: "Enter degree",
+    placeholder: " ",
     propToUpdate: "degree",
     required: true,
   },
@@ -93,22 +93,22 @@ const educationForm = [
 ];
 
 const technicalSkillsForm = [
-  { title: "Language/Frameworks", placeholder: "", propToUpdate: "languages" },
-  { title: "Testing/Deployment", placeholder: "", propToUpdate: "testing" },
-  { title: "Developer Tools", placeholder: "", propToUpdate: "devTools" },
-  { title: "Certifications", placeholder: "", propToUpdate: "certifications" },
+  { title: "Language/Frameworks", placeholder: " ", propToUpdate: "languages" },
+  { title: "Testing/Deployment", placeholder: " ", propToUpdate: "testing" },
+  { title: "Developer Tools", placeholder: " ", propToUpdate: "devTools" },
+  { title: "Certifications", placeholder: " ", propToUpdate: "certifications" },
 ];
 
 const experienceForm = [
   {
     title: "Company Name",
-    placeholder: "Enter Company Name",
+    placeholder: " ",
     propToUpdate: "name",
     required: true,
   },
   {
     title: "Job title",
-    placeholder: "Enter Job Title",
+    placeholder: " ",
     propToUpdate: "jobTitle",
     required: true,
   },
@@ -120,19 +120,19 @@ const experienceForm = [
 const projectForm = [
   {
     title: "Project Name",
-    placeholder: "Enter Project Name",
+    placeholder: " ",
     propToUpdate: "name",
     required: true,
   },
   {
     title: "Your role in the project",
-    placeholder: "Enter your role",
+    placeholder: " ",
     propToUpdate: "jobTitle",
     required: true,
   },
   {
     title: "Technologies Used",
-    placeholder: "HTML, CSS, React",
+    placeholder: " ",
     propToUpdate: "technologies",
     required: true,
   },

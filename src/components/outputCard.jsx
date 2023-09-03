@@ -10,21 +10,24 @@ function OutputCard({ title, info, children }) {
 function GenericOutputCard({ title, info }) {
   return (
     <OutputCard title={title} info={info}>
-      {info.map((i) => (
-        <div className="output-content-container" key={i.id}>
-          <GenericOutputContainer className="left">
-            <BoldParagraph>{i.name}</BoldParagraph>
-            <ItalicParagraph>{i.degree ?? i.jobTitle}</ItalicParagraph>
-          </GenericOutputContainer>
-          <BulletPoints info={i} />
-          <GenericOutputContainer className="right">
-            <BoldParagraph>
-              {i.startDate && `${i.startDate ?? ""} - ${i.endDate ?? ""}`}
-            </BoldParagraph>
-            <ItalicParagraph>{i.location ?? i.technologies}</ItalicParagraph>
-          </GenericOutputContainer>
-        </div>
-      ))}
+      {info.map((i) => {
+        const fullDate = `${i.startDate ?? ""} - ${i.endDate ?? ""}`;
+        return (
+          <div className="output-content-container" key={i.id}>
+            <GenericOutputContainer className="left">
+              <BoldParagraph>{i.name}</BoldParagraph>
+              <ItalicParagraph>{i.degree ?? i.jobTitle}</ItalicParagraph>
+            </GenericOutputContainer>
+            <BulletPoints info={i} />
+            <GenericOutputContainer className="right">
+              <BoldParagraph>
+                {(i.startDate && fullDate) || (i.endDate && fullDate)}
+              </BoldParagraph>
+              <ItalicParagraph>{i.location ?? i.technologies}</ItalicParagraph>
+            </GenericOutputContainer>
+          </div>
+        );
+      })}
     </OutputCard>
   );
 }

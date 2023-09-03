@@ -91,7 +91,9 @@ function RightSideContainer({ info }) {
   const fullDate = `${info.startDate ?? ""} - ${info.endDate ?? ""}`;
   return (
     <View style={{ ...styles.contentContainer, alignItems: "flex-end" }}>
-      <BoldParagraph>{fullDate}</BoldParagraph>
+      <BoldParagraph>
+        {(info.startDate && fullDate) || (info.endDate && fullDate)}
+      </BoldParagraph>
       <ItalicParagraph>{info.location ?? info.technologies}</ItalicParagraph>
     </View>
   );

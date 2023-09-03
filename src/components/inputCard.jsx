@@ -111,34 +111,38 @@ export default function InputCard({
       containerState={containerState}
       containerIndex={containerIndex}
     >
-      <div className="container-content">
-        {isAddButtonActive ? (
-          <DataCard
-            info={information}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-          />
-        ) : (
-          <form onSubmit={handleSave}>
-            <InputForm
-              sectionForm={sectionForm}
-              information={information}
-              setInformation={setInformation}
-              itemsId={itemsId}
-              clearRequest={clearRequest}
+      {containerIndex === containerState && (
+        <div className="container-content">
+          {isAddButtonActive ? (
+            <DataCard
+              info={information}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
             />
-            <FormButtons onCancel={handleCancel} />
-          </form>
-        )}
-      </div>
-      <div className="container-footer">
-        {!expandable && information.length <= 0 && isAddButtonActive && (
-          <AddNewButton onAdd={handleAdd} title={buttonTitle} />
-        )}
-        {expandable && isAddButtonActive && (
-          <AddNewButton onAdd={handleAdd} title={buttonTitle} />
-        )}
-      </div>
+          ) : (
+            <form onSubmit={handleSave}>
+              <InputForm
+                sectionForm={sectionForm}
+                information={information}
+                setInformation={setInformation}
+                itemsId={itemsId}
+                clearRequest={clearRequest}
+              />
+              <FormButtons onCancel={handleCancel} />
+            </form>
+          )}
+        </div>
+      )}
+      {containerIndex === containerState && (
+        <div className="container-footer">
+          {!expandable && information.length <= 0 && isAddButtonActive && (
+            <AddNewButton onAdd={handleAdd} title={buttonTitle} />
+          )}
+          {expandable && isAddButtonActive && (
+            <AddNewButton onAdd={handleAdd} title={buttonTitle} />
+          )}
+        </div>
+      )}
     </ParentContainer>
   );
 }
@@ -155,11 +159,17 @@ function ParentContainer({
       className="form-section"
       aria-expanded={containerState === containerIndex}
     >
-      <div className="container-header">
-        <h2 className="container-title">{title}</h2>
-        <button type="button" onClick={() => onShow(containerIndex)}></button>
+      <div className="wrapper">
+        <div className="container-header">
+          <h2 className="container-title">{title}</h2>
+          <button
+            type="button"
+            aria-controls={title}
+            onClick={() => onShow(containerIndex)}
+          ></button>
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   );
 }

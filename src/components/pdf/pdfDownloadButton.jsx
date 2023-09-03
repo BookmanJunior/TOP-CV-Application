@@ -10,6 +10,7 @@ export default function PdfDownloadButton({
 }) {
   return (
     <PDFDownloadLink
+      className="hover-accent"
       document={
         <PdfOutput
           generalInformation={generalInformation}
@@ -21,7 +22,7 @@ export default function PdfDownloadButton({
       }
       fileName="cv"
     >
-      {() => <button className="hover-accent">Download PDF</button>}
+      {() => "Download PDF"}
     </PDFDownloadLink>
   );
 }

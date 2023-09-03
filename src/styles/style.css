@@ -428,9 +428,13 @@ a > button {
 
 /* input validation styles */
 
+.input-field {
+  outline: none;
+  border-width: 2px;
+}
+
 .input-field:focus {
-  outline: 1px solid var(--accent);
-  border: 1px solid var(--accent);
+  border: 2px solid var(--accent);
 }
 
 .input-field::placeholder {
@@ -456,7 +460,6 @@ a > button {
 .input-field:invalid + span {
   border-color: var(--invalid);
   color: var(--invalid);
-  outline-color: var(--invalid);
 }
 
 .input-field:valid,
@@ -464,20 +467,17 @@ a > button {
 .input-field:valid:focus {
   border-color: var(--valid);
   color: var(--valid);
-  outline-color: var(--valid);
 }
 
 .input-field:is(:invalid, :valid):placeholder-shown,
 .input-field:is(:invalid, :valid):placeholder-shown + span {
   border-color: var(--gray);
-  outline-color: var(--gray);
   color: var(--gray);
 }
 
 .input-field:is(:invalid, :valid):focus:placeholder-shown,
 .input-field:is(:invalid, :valid):focus:placeholder-shown + span {
   border-color: var(--accent);
-  outline-color: var(--accent);
   color: var(--accent);
 }
 

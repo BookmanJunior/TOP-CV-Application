@@ -126,12 +126,22 @@ aside .preview-btn {
 aside button,
 .form-buttons button,
 .add-button,
-a button,
+a,
 .modal-buttons button {
   padding: 7px 2em;
   border-radius: 8px;
   font-size: 1.1rem;
   transition: 200ms ease-in-out;
+}
+
+a,
+button {
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+  text-align: center;
 }
 
 li button {
@@ -147,7 +157,6 @@ button {
   cursor: pointer;
   appearance: none;
   border: none;
-  color: var(--text);
 }
 
 /* input section styles */
@@ -160,6 +169,10 @@ button {
 
 #deleteIcon {
   fill: var(--text);
+}
+
+button:hover #deleteIcon {
+  fill: #ff0000;
 }
 
 .input-container {
@@ -357,10 +370,6 @@ ul.output-bullet-points {
     grid-row: 1;
     grid-column: 2;
   }
-}
-
-a > button {
-  width: 100%;
 }
 
 @media screen and (max-width: 680px) {

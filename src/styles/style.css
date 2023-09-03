@@ -161,12 +161,6 @@ button {
 
 /* input section styles */
 
-.input-field {
-  padding: var(--input-size);
-  border: 1px solid var(--gray);
-  background-color: var(--secondary-bg-color);
-}
-
 #deleteIcon {
   fill: var(--text);
 }
@@ -438,12 +432,14 @@ ul.output-bullet-points {
 /* input validation styles */
 
 .input-field {
+  padding: var(--input-size);
+  border: 2px solid var(--gray);
   outline: none;
-  border-width: 2px;
+  background-color: var(--secondary-bg-color);
 }
 
 .input-field:focus {
-  border: 2px solid var(--accent);
+  border-color: var(--accent);
 }
 
 .input-field::placeholder {

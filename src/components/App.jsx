@@ -71,16 +71,16 @@ export default function App() {
           project={projects}
         />
         <button
-          className="hover-warning"
-          onClick={() => setIsModalActive(!isModalActive)}
-        >
-          Clear
-        </button>
-        <button
           className="hover-accent preview-btn"
           onClick={() => setIsPreviewActive(!isPreviewActive)}
         >
           Preview
+        </button>
+        <button
+          className="hover-warning"
+          onClick={() => setIsModalActive(!isModalActive)}
+        >
+          Clear
         </button>
       </aside>
       <section className="input-section">

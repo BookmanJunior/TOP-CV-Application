@@ -1,6 +1,11 @@
 export default function OutputHeader({ generalInformation }) {
   return (
-    <div className="output-header">
+    <div
+      className={
+        (generalInformation[0].firstName && "output-header") ||
+        (generalInformation[0].lastName && "output-header")
+      }
+    >
       <HeaderTitle generalInformation={generalInformation} />
       <HeaderContent generalInformation={generalInformation} />
       <Links generalInformation={generalInformation} />

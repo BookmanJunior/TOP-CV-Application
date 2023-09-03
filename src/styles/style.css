@@ -190,9 +190,10 @@ button:hover #deleteIcon {
     scale 50ms ease-in;
 }
 
-.form-buttons {
-  display: flex;
-  gap: 5px;
+.input-field:not(:placeholder-shown) + span,
+.input-field:focus + span {
+  transform: translateY(-27px);
+  scale: 0.9;
 }
 
 .bullet-point {
@@ -202,6 +203,11 @@ button:hover #deleteIcon {
 textarea + span {
   position: absolute;
   top: 10px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 5px;
 }
 
 .container-content ul {
@@ -449,12 +455,6 @@ ul.output-bullet-points {
 .input-field:focus + span,
 .input-field:not(:placeholder-shown) + span {
   background-color: var(--secondary-bg-color);
-}
-
-.input-field:not(:placeholder-shown) + span,
-.input-field:focus + span {
-  transform: translateY(-27px);
-  scale: 0.9;
 }
 
 .input-field:not(:placeholder-shown):focus + span {
